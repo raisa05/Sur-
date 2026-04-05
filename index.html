@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Sur+ | The Curated Surplus</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <!-- Design System -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Page-specific overrides / extras ─────────────── */
+
+        /* Onboarding split layout */
+        #page-onboarding .split-left {
+            background: linear-gradient(135deg, #000000 0%, #0D1B2A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #page-onboarding .split-left .overlay-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+        }
+
+        #page-onboarding .split-left .overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #000000 0%, transparent 100%);
+            opacity: 0.8;
+        }
+
+        #page-onboarding .stat-glass {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            max-width: 280px;
+        }
+
+        /* Role icon containers */
+        .role-icon-resident {
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+            background: var(--color-secondary-fixed);
+            color: var(--color-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .role-icon-retailer {
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+            background: var(--color-primary-fixed);
+            color: var(--color-primary-container);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Browse: category grid */
+        .category-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 500ms ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.07);
+        }
+
+        .category-card .cat-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 27, 42, 0.8) 0%, transparent 60%);
+        }
+
+        .category-card .cat-label {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9375rem;
+        }
+
+        /* Browse: listing card */
+        .listing-card {
+            background: var(--color-surface-container-lowest);
+            border-radius: var(--radius-2xl);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            transition: box-shadow var(--transition-base);
+        }
+
+        .listing-card:hover {
+            box-shadow: var(--shadow-elevated);
+        }
+
+        @media (min-width: 480px) {
+            .listing-card {
+                flex-direction: row;
+            }
+        }
+
+        .listing-card .listing-img {
+            width: 100%;
+            height: 9rem;
+            flex-shrink: 0;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .listing-card .listing-img {
+                width: 8rem;
+                height: 8rem;
+            }
+        }
+
+        .listing-card .listing-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 400ms ease;
+        }
+
+        .listing-card:hover .listing-img img {
+            transform: scale(1.05);
+        }
+
+        /* Map section */
+        .map-section {
+            position: relative;
+            width: 100%;
+            margin: 0;
+            height: 320px;
+            border-radius: var(--radius-3xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .map-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.7) opacity(0.85);
+            transform: scale(3.5);
+            transform-origin: center center;
+        }
+
+        /* Product hero */
+        .product-hero {
+            aspect-ratio: 4/5;
+            border-radius: var(--radius-3xl);
+            overflow: hidden;
+            background: var(--color-surface-container);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        @media (min-width: 768px) {
+            .product-hero {
+                aspect-ratio: 16/10;
+            }
+        }
+
+        /* Impact collectible */
+        .sticker {
+            width: 40px;
+            height: 56px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .sticker.locked {
+            background: rgba(107, 114, 128, 0.15);
+            border: 2px dashed rgba(107, 114, 128, 0.3);
+        }
+
+        .sticker.earned {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .sticker.active {
+            width: 44px;
+            height: 64px;
+            margin-top: -4px;
+            border: 2px solid white;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+            z-index: 2;
+        }
+
+        /* Retailer: circular progress */
+        .circular-progress svg {
+            transform: rotate(-90deg);
+        }
+
+        /* Ping animation */
+        @keyframes ping {
+
+            75%,
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        .ping-anim {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* Pulse card (onboarding error) */
+        @keyframes pulseCard {
+
+            0%,
+            100% {
+                box-shadow: var(--shadow-float);
+            }
+
+            50% {
+                box-shadow: 0 0 0 3px var(--color-secondary);
+            }
+        }
+
+        /* Desktop top nav links */
+        .top-bar-nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .top-bar-nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .top-bar-nav-link.active {
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Notification badge */
+        .notif-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            border: 2px solid var(--color-primary-container);
+        }
+
+        /* Checkout collection/payment cards */
+        .info-card {
+            background: var(--color-surface-container-low);
+            border-radius: var(--radius-xl);
+            padding: 1.25rem;
+        }
+
+        .info-card.mint-accent {
+            border-left: 4px solid var(--color-secondary);
+        }
+
+        .info-card.navy-accent {
+            border-left: 4px solid var(--color-primary-container);
+        }
+
+        /* Progress bar (community) */
+        .community-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .community-bar-fill {
+            height: 100%;
+            width: 76%;
+            background: var(--color-secondary-fixed);
+            border-radius: 999px;
+            box-shadow: 0 0 8px rgba(177, 240, 206, 0.4);
+        }
+
+        /* "Looking for something" CTA */
+        .notify-cta {
+            background: #E3EFFB;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        /* Retailer bento grid */
+        .retailer-listing-img {
+            width: 96px;
+            height: 96px;
+            flex-shrink: 0;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        .retailer-listing-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 500ms ease;
+        }
+
+        /* ── Ensure pages fill the viewport ───────────── */
+        .page {
+            position: relative;
+        }
+
+        #page-onboarding {
+            min-height: 100dvh;
+            display: none;
+        }
+
+        #page-onboarding.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Scrollable pages */
+        .scrollable-page {
+            padding-top: 64px;
+            padding-bottom: 80px;
+            min-height: 100dvh;
+        }
+
+        /* ── Back button ──────────────────────────────── */
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-base);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .back-btn:active {
+            transform: scale(0.88);
+        }
+
+        /* Search icon in input */
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-on-surface-variant);
+            pointer-events: none;
+        }
+
+        /* ── Allergen badge ──────────────────────────── */
+        .allergen-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 218, 214, 0.4);
+            border: 1px solid rgba(186, 26, 26, 0.2);
+            color: #93000a;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-xl);
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════════════
+     MOBILE SIDEBAR DRAWER
+═════════════════════════════════════════════════════ -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <nav id="mobile-sidebar" class="mobile-sidebar">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+            <img src="logo.png"
+                alt="Sur+" style="height:2rem;" />
+            <button onclick="closeSidebar()" style="background:none;border:none;cursor:pointer;padding:0.5rem;"
+                aria-label="Close menu">
+                <span class="material-symbols-outlined" style="color:#191c1d;">close</span>
+            </button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.375rem;">
+            <a href="#" class="sidebar-nav-item" onclick="navigate('browse');closeSidebar();">
+                <span class="material-symbols-outlined">home</span> Browse
+            </a>
+            <a href="#" class="sidebar-nav-item" onclick="navigate('impact');closeSidebar();">
+                <span class="material-symbols-outlined">eco</span> Impact
+            </a>
+            <a href="#" class="sidebar-nav-item" onclick="navigate('retailer');closeSidebar();">
+                <span class="material-symbols-outlined">storefront</span> Retailer Dashboard
+            </a>
+            <a href="#" class="sidebar-nav-item" onclick="navigate('onboarding');closeSidebar();">
+                <span class="material-symbols-outlined">logout</span> Sign Out
+            </a>
+        </div>
+        <div
+            style="margin-top:auto;background:var(--color-surface-container-low);border-radius:var(--radius-xl);padding:1rem;">
+            <div class="label-sm" style="color:var(--color-on-surface-variant);margin-bottom:0.25rem;">Account</div>
+            <div style="font-weight:700;font-size:0.875rem;">Ahmed Al Rashidi</div>
+            <div style="font-size:0.75rem;color:var(--color-on-surface-variant);">ahmed@example.com</div>
+        </div>
+    </nav>
+
+
+    <!-- ═══════════════════════════════════════════════════
+     PAGE 1: ONBOARDING / ROLE SELECTION
+═════════════════════════════════════════════════════ -->
+    <div id="page-onboarding" class="page">
+
+        <!-- Header -->
+        <header
+            style="background:var(--color-primary-container);padding:0 1rem;height:64px;display:flex;align-items:center;position:sticky;top:0;z-index:100;">
+            <img src="logo.png"
+                alt="Sur+" class="top-bar-logo" />
+        </header>
+
+        <!-- Split layout -->
+        <main style="display:flex;flex-direction:row;flex:1;min-height:calc(100dvh - 64px);">
+
+            <!-- LEFT: Branding (desktop only) -->
+            <section class="split-left hide-sm"
+                style="width:50%;display:flex;flex-direction:column;justify-content:space-between;padding:4rem;">
+                <img class="overlay-img"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQWkYwHslXGGwLA9oSDkf-lgdkGd58VosCVJ0XT_vZvfW592kniUEiN_WpgWpcp25QbjM0zuF_XNenn_bOplfuSkN8QejTVu4FjfXYah9wneIvQDFYk3Wtj-QiHZ9NzbKnemytOL50kJ-G-PIz_Nmdda74WM30aj1OFF7qZ7xyhhAKt2a3Z5nWZTweHqugZrATMcC1o9X-ZYwDvZh7cPvhXcFfwSZlVKhJWZsD5Y36RvPbcCEENGQDA8Y7HxgFwMmETO4GE0uJKoI"
+                    alt="" />
+                <div class="overlay-gradient"></div>
+                <div style="position:relative;z-index:2;">
+                    <h1
+                        style="font-family:var(--font-headline);font-size:3.5rem;font-weight:800;color:white;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.5rem;">
+                        Dubai's finest surplus,<br />
+                        <span style="color:var(--color-secondary-fixed);">curated for you.</span>
+                    </h1>
+                    <p
+                        style="color:var(--color-on-primary-container);font-size:1.125rem;max-width:380px;line-height:1.6;">
+                        Connecting premium surplus from Dubai's best kitchens with those who value taste and
+                        sustainability.
+                    </p>
+                </div>
+                <div class="stat-glass" style="position:relative;z-index:2;">
+                    <div
+                        style="font-family:var(--font-headline);font-size:3rem;font-weight:800;color:var(--color-secondary-fixed);letter-spacing:-0.02em;line-height:1;">
+                        240k+</div>
+                    <div class="label-sm" style="color:white;margin-top:0.25rem;">Meals Rescued in Dubai</div>
+                </div>
+            </section>
+
+            <!-- RIGHT: Role selection -->
+            <section
+                style="flex:1;background:var(--color-surface-container-low);display:flex;align-items:center;justify-content:center;padding:1.5rem;">
+                <div style="width:100%;max-width:440px;">
+
+                    <!-- Heading -->
+                    <div style="margin-bottom:2rem;text-align:center;">
+                        <h2
+                            style="font-family:var(--font-headline);font-size:1.875rem;font-weight:800;color:var(--color-primary-container);letter-spacing:-0.01em;margin-bottom:0.5rem;">
+                            Welcome to Surplus</h2>
+                        <p style="color:#4b5563;font-size:1rem;line-height:1.5;">Choose your role to start making an
+                            impact in your neighbourhood.</p>
+                    </div>
+
+                    <!-- Role cards -->
+                    <div style="display:flex;flex-direction:column;gap:1rem;" id="role-selector">
+
+                        <!-- Resident -->
+                        <button class="role-card" data-role="resident" onclick="selectRole(this)">
+                            <div class="icon-bg">
+                                <span class="material-symbols-outlined"
+                                    style="font-size:6rem;color:var(--color-primary-container);">shopping_basket</span>
+                            </div>
+                            <div class="role-icon-resident">
+                                <span class="material-symbols-outlined icon-fill"
+                                    style="font-size:1.75rem;">person</span>
+                            </div>
+                            <div style="flex:1;min-width:0;">
+                                <div
+                                    style="font-family:var(--font-headline);font-size:1.25rem;font-weight:800;color:var(--color-primary-container);">
+                                    Resident</div>
+                                <div style="font-size:0.875rem;color:#4b5563;margin-top:0.125rem;">I want to find &amp;
+                                    rescue premium surplus nearby.</div>
+                            </div>
+                            <span class="material-symbols-outlined arrow-icon"
+                                style="color:var(--color-primary-container);flex-shrink:0;">arrow_forward</span>
+                        </button>
+
+                        <!-- Retailer -->
+                        <button class="role-card" data-role="retailer" onclick="selectRole(this)">
+                            <div class="icon-bg">
+                                <span class="material-symbols-outlined"
+                                    style="font-size:6rem;color:var(--color-primary-container);">storefront</span>
+                            </div>
+                            <div class="role-icon-retailer">
+                                <span class="material-symbols-outlined icon-fill"
+                                    style="font-size:1.75rem;">storefront</span>
+                            </div>
+                            <div style="flex:1;min-width:0;">
+                                <div
+                                    style="font-family:var(--font-headline);font-size:1.25rem;font-weight:800;color:var(--color-primary-container);">
+                                    Retailer</div>
+                                <div style="font-size:0.875rem;color:#4b5563;margin-top:0.125rem;">I want to list
+                                    surplus and reduce waste.</div>
+                            </div>
+                            <span class="material-symbols-outlined arrow-icon"
+                                style="color:var(--color-primary-container);flex-shrink:0;">arrow_forward</span>
+                        </button>
+                    </div>
+
+                    <!-- Continue CTA -->
+                    <div style="margin-top:1.5rem;">
+                        <button class="btn btn-secondary-green"
+                            style="width:100%;height:56px;font-size:1rem;border-radius:var(--radius-xl);"
+                            onclick="handleRoleConfirm()">
+                            Continue
+                        </button>
+                    </div>
+
+                    <!-- Footer -->
+                    <div style="margin-top:2.5rem;text-align:center;">
+                        <p style="font-size:0.875rem;color:#4b5563;margin-bottom:1rem;">Already have an account?</p>
+                        <button class="btn btn-primary"
+                            style="border-radius:var(--radius-xl);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:0 3rem;height:48px;"
+                            onclick="navigate('browse')">
+                            Sign In
+                        </button>
+                        <div style="margin-top:2rem;display:flex;justify-content:center;gap:0.5rem;">
+                            <a href="#"
+                                style="color:#6b7280;font-size:0.625rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;padding:0.75rem 1rem;text-decoration:none;"
+                                onmouseover="this.style.color='#000'" onmouseout="this.style.color='#6b7280'">Privacy
+                                Policy</a>
+                            <a href="#"
+                                style="color:#6b7280;font-size:0.625rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;padding:0.75rem 1rem;text-decoration:none;"
+                                onmouseover="this.style.color='#000'" onmouseout="this.style.color='#6b7280'">Terms of
+                                Service</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div><!-- /page-onboarding -->
+
+
+    <!-- ═══════════════════════════════════════════════════
+     PAGE 2: BROWSE HUB
+═════════════════════════════════════════════════════ -->
+    <div id="page-browse" class="page">
+
+        <!-- Top Bar -->
+        <header class="top-bar" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:1rem;">
+                <!-- Hamburger removed -->
+                <img src="logo.png" alt="Sur+" class="top-bar-logo" />
+            </div>
+            <!-- Desktop nav -->
+            <nav class="hide-sm" style="display:flex;align-items:center;gap:0.5rem;">
+                <a class="top-bar-nav-link active" onclick="navigate('browse')" data-nav-page="browse">Home</a>
+                <a class="top-bar-nav-link" onclick="navigate('impact')" data-nav-page="impact">Impact</a>
+                <a class="top-bar-nav-link" onclick="showToast('Account coming soon!')">Account</a>
+            </nav>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div class="persona-toggle" onclick="togglePersona()" data-role="resident" title="Toggle persona">
+                    <div class="toggle-bg"></div>
+                    <span class="toggle-label resident">C</span>
+                    <span class="toggle-label retailer">R</span>
+                </div>
+                <button class="top-bar-icon" style="position:relative;" aria-label="Notifications"
+                    onclick="showToast('No new notifications.')">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <div class="notif-badge"></div>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="scrollable-page" style="max-width:800px;margin:0 auto;padding-left:1rem;padding-right:1rem;">
+
+            <!-- Search -->
+            <div style="margin-top:1rem;" class="search-wrapper">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input class="input-field" type="text" placeholder="Search groceries or bakeries…"
+                    onkeydown="handleSearch(event)" />
+            </div>
+
+            <!-- Quick Browse -->
+            <section style="margin-top:2rem;">
+                <h2
+                    style="font-family:var(--font-headline);font-size:1.5rem;font-weight:700;color:var(--color-on-surface);margin-bottom:1rem;padding:0 0.25rem;">
+                    Quick Browse</h2>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;">
+                    <!-- Groceries -->
+                    <div class="category-card" onclick="showToast('Browsing Groceries…')">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdsISc_R_v4Utf9aygRuDF3Qg9X1FVlK-NHJd6EG6iK3jFpFWtWkpb7DvwkxhXQ37EX-5a_2AbYRi2CoSuP9b6D8MjAatEaOr_bfOzihs5bAHkZNij1kvCLgJk_7zn6-nvPZnhaXP280XsNpllfcLU9dUWDjKhq_MXRdRjFsn3EeEyICJj88VSZgsiDSHGMqXXfqxDqMhBtltcx9ljqa5zexs2Jv3EmjaYwmI7_OgxOePQvl_yf2wvOk6urlmPTCDvyhwhk9hNt9I"
+                            alt="Groceries" />
+                        <div class="cat-overlay"></div>
+                        <div class="cat-label">Groceries</div>
+                    </div>
+                    <!-- Bakery -->
+                    <div class="category-card" onclick="navigate('product')">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7-Ll1xSUIc_flkCxBkxWl5a1mw2OcwF7cHTCjk-aoJPwB0ptkeRN59iD4FBsStq5o7zcB9OPLB0oB-6BdREL0QKtNZ65ZmSLvMY9HATDYpBH45fXmjoFEB984rVhfVvzt1RfHAPPj-BYGU27Hw8VJ0mQJDm95wi_0JX5OkSkRkN4i48fouZ7mrT-A7YLpKlDyQtSqk8dz1ncI03J6y5mCW_quGq29t3gfm5nLb49vClByxGkNs1rK2u2BRE8mujUFIPVZ96eZbRg"
+                            alt="Bakery" />
+                        <div class="cat-overlay"></div>
+                        <div class="cat-label">Bakery</div>
+                    </div>
+                    <!-- Prepared Meals -->
+                    <div class="category-card" onclick="showToast('Browsing Prepared Meals…')">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlwhoxQn3uoXfA2B_4T3OlZMwVlyA3zBRva0Od-RwSOCsr1wLPccYodu4JbyZ_LhXwLKGmY8C6v5_Trsx7NYDKMiaLBvqE3wrNXBmNRm_NERHRALGlx3LGy3Xh2KkHeIDc4MlRLmSAOyjmryL7pGEVpoQRLZqJDGR4inD1yW-NYS_06p8Xn50zkZq58lFefYeo6WGk_qb6vi8E_WE4mthLmDuCvaFTowGaMv7WNTi20A0RQxMuS8d6Tt6-kKi8bHCCgs2eAbLk1BU"
+                            alt="Prepared Meals" />
+                        <div class="cat-overlay"></div>
+                        <div class="cat-label">Prepared Meals</div>
+                    </div>
+                    <!-- Produce -->
+                    <div class="category-card" onclick="showToast('Browsing Produce…')">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE8VfixM69duL0dYfr1bLik6M45Z3mCa5WAlgxES9JLrsdDZIvBPu5VeFUMgmG-NKgd14R0eRlggVngedcLM4N7xXlmLSf0rPfJXaIDXNJ2SQRvgrFP0MNbkniPUUssE0BtZLzw_UJdhX1PU7XEX-oOpTCgwpLGXZMNdF0iR2aG278Ca-K5qbj4ORlh1Zjjj3_RLqQrWMPe1jhWDlzDqPqZ7tI2wfOUXuMPdfl_FMMR4Xhb96-LOMyLVv-UXkoyrrXClVQ7xI4zw0"
+                            alt="Produce" />
+                        <div class="cat-overlay"></div>
+                        <div class="cat-label">Produce</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Surplus Near You / Map -->
+            <section style="margin-top:2rem;">
+                <div
+                    style="display:flex;justify-content:space-between;align-items:center;padding:0 0.25rem;margin-bottom:1rem;">
+                    <h2 style="font-family:var(--font-headline);font-size:1.5rem;font-weight:700;">Surplus Near You</h2>
+                    <button
+                        style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:0.25rem;font-size:0.875rem;font-weight:600;color:var(--color-on-surface-variant);"
+                        onclick="showToast('Opening full map…')">
+                        Full Screen <span class="material-symbols-outlined" style="font-size:1rem;">open_in_full</span>
+                    </button>
+                </div>
+                <div class="map-section">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAHjdvSVsmddNQ8uJhA2NA61KcEFG8MW2TgQJhPC2n0Udn0B_uyBJd0QnrsAD0PcAwYqexKF_tHeFGmagoGue0p3x4uWTc9K49ozd3Xw2ke4zTTXVU8kHsr33iD6uPZnZdibdEmpzUPbgKjexhCzKm4RSmpWIezKHIqnv-LLNbXzxSXNeLTZET30Dk1vSB-PfOTPVpq71FUPOkTOqigWG6R0_AoNJJK9u0dhVC6bu179CDtosgpTy-fUfnc58C2Dh03DZwFFMjDME"
+                        alt="Map" />
+                    <!-- Price pins -->
+                    <div class="map-pin" style="top:25%;left:33%;">
+                        <div class="map-pin-label" style="animation:pulse 2s ease infinite;">AED 5.00</div>
+                        <div class="map-pin-tail"></div>
+                    </div>
+                    <div class="map-pin" style="bottom:30%;right:22%;">
+                        <div class="map-pin-label">AED 8.50</div>
+                        <div class="map-pin-tail"></div>
+                    </div>
+                    <div class="map-pin" style="top:48%;right:48%;">
+                        <div class="map-pin-label">AED 4.20</div>
+                        <div class="map-pin-tail"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Nearby Listings -->
+            <section style="margin-top:2rem;">
+                <div style="display:flex;flex-direction:column;gap:1rem;">
+
+                    <!-- Listing 1: Green Valley -->
+                    <div class="listing-card" onclick="navigate('product')">
+                        <div class="listing-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxXNp-Wm3vW1DF1iVyZtoVOFK048pjG6nviEVBNFx1DWYn2Bj6FeFjmDTmxSBrSs71byPI0gIZrb1lXhjNOWo_pcW2goi45cSMxKio08nydOvHOO-68tFQ-iHazljxva05kKW5VzsJOOU8BIa7BSNEL7AqIBO0Gun-aaTCXek33qVjYAYyqDoetO6ggvqNmBJKcJY3Yfkf7g-PZXkicqvr0_Ynm19OO00QmYzxmm3ZeupUGa2PsEI28_zKVaMG6zf_IDgpvOWpT3E"
+                                alt="Green Valley" />
+                        </div>
+                        <div
+                            style="flex:1;display:flex;flex-direction:column;justify-content:space-between;min-width:0;">
+                            <div>
+                                <div
+                                    style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.25rem;">
+                                    <h3
+                                        style="font-family:var(--font-headline);font-size:1.0625rem;font-weight:700;color:var(--color-primary-container);">
+                                        Green Valley Market</h3>
+                                    <div class="chip-verified" style="margin-left:0.5rem;flex-shrink:0;">
+                                        <span class="material-symbols-outlined icon-fill"
+                                            style="font-size:0.75rem;">verified</span>VERIFIED
+                                    </div>
+                                </div>
+                                <p style="color:var(--color-on-surface-variant);font-weight:500;font-size:0.9375rem;">
+                                    Organic Surplus Box</p>
+                                <div
+                                    style="display:flex;align-items:center;gap:0.75rem;margin-top:0.375rem;font-size:0.8125rem;color:var(--color-on-surface-variant);">
+                                    <span style="display:flex;align-items:center;gap:0.25rem;"><span
+                                            class="material-symbols-outlined" style="font-size:1rem;">near_me</span> 0.4
+                                        km</span>
+                                    <span style="display:flex;align-items:center;gap:0.25rem;"><span
+                                            class="material-symbols-outlined" style="font-size:1rem;">schedule</span>
+                                        Expires 24/10/26</span>
+                                </div>
+                            </div>
+                            <div
+                                style="display:flex;align-items:center;justify-content:space-between;margin-top:0.875rem;">
+                                <div style="display:flex;align-items:baseline;gap:0.5rem;">
+                                    <span
+                                        style="font-size:1.5rem;font-weight:900;color:var(--color-primary-container);">AED
+                                        7.50</span>
+                                    <span
+                                        style="font-size:0.75rem;color:var(--color-on-surface-variant);text-decoration:line-through;">AED
+                                        22.00</span>
+                                </div>
+                                <button class="btn btn-primary"
+                                    style="height:44px;padding:0 1.25rem;border-radius:var(--radius-xl);font-size:0.875rem;"
+                                    onclick="event.stopPropagation();navigate('product')">
+                                    Reserve
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listing 2: Blueberry Hills -->
+                    <div class="listing-card" onclick="navigate('product')">
+                        <div class="listing-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIbFZNyqfg6Cu6Bp5zP7a2op8udujdzC4yaHwlo3KXWJhSa2byoEbVxw2WPHrFDCLdadljBDjF88yjrmgb2Xq8Kqy5RGPq97vo-9xXd5sK66NlTY9NgHnBsP9a6QP0kL3Y8mXmwgXmPThaenMZgQ798cIbdkEQEzoY5JyflBlGwaqejrC9go9oSBct9-YJTxCn0s7ItVUVW5nJhwRPcDlPhWzCwAPHcQVi6zHMcfP9LZJSzYzBL-ZXGTno2OsGVGvrF1p1ymt-DZM"
+                                alt="Blueberry Hills" />
+                        </div>
+                        <div
+                            style="flex:1;display:flex;flex-direction:column;justify-content:space-between;min-width:0;">
+                            <div>
+                                <div
+                                    style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.25rem;">
+                                    <h3
+                                        style="font-family:var(--font-headline);font-size:1.0625rem;font-weight:700;color:var(--color-primary-container);">
+                                        Blueberry Hills Bakery</h3>
+                                    <div class="chip-verified" style="margin-left:0.5rem;flex-shrink:0;">
+                                        <span class="material-symbols-outlined icon-fill"
+                                            style="font-size:0.75rem;">verified</span>VERIFIED
+                                    </div>
+                                </div>
+                                <p style="color:var(--color-on-surface-variant);font-weight:500;font-size:0.9375rem;">
+                                    Mixed Pastry Bag (Large)</p>
+                                <div
+                                    style="display:flex;align-items:center;gap:0.75rem;margin-top:0.375rem;font-size:0.8125rem;color:var(--color-on-surface-variant);">
+                                    <span style="display:flex;align-items:center;gap:0.25rem;"><span
+                                            class="material-symbols-outlined" style="font-size:1rem;">near_me</span> 1.2
+                                        km</span>
+                                    <span style="display:flex;align-items:center;gap:0.25rem;"><span
+                                            class="material-symbols-outlined" style="font-size:1rem;">schedule</span>
+                                        Expires 24/10/26</span>
+                                </div>
+                            </div>
+                            <div
+                                style="display:flex;align-items:center;justify-content:space-between;margin-top:0.875rem;">
+                                <div style="display:flex;align-items:baseline;gap:0.5rem;">
+                                    <span
+                                        style="font-size:1.5rem;font-weight:900;color:var(--color-primary-container);">AED
+                                        4.20</span>
+                                    <span
+                                        style="font-size:0.75rem;color:var(--color-on-surface-variant);text-decoration:line-through;">AED
+                                        15.00</span>
+                                </div>
+                                <button class="btn btn-primary"
+                                    style="height:44px;padding:0 1.25rem;border-radius:var(--radius-xl);font-size:0.875rem;"
+                                    onclick="event.stopPropagation();navigate('product')">
+                                    Reserve
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Notify CTA -->
+            <section style="margin-top:2rem;margin-bottom:1rem;">
+                <div class="notify-cta">
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+                        <div
+                            style="width:64px;height:64px;background:white;border-radius:var(--radius-xl);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-card);">
+                            <span class="material-symbols-outlined icon-fill"
+                                style="font-size:2rem;color:var(--color-primary-container);">storefront</span>
+                        </div>
+                        <div>
+                            <h3
+                                style="font-family:var(--font-headline);font-size:1.375rem;font-weight:800;color:#1D2B3A;letter-spacing:-0.01em;">
+                                Looking for something else?</h3>
+                            <p
+                                style="color:#6B7C93;font-size:0.9375rem;line-height:1.5;max-width:280px;margin:0.5rem auto 0;">
+                                Help us grow our network. We'll notify you when new stores join.
+                            </p>
+                        </div>
+                        <button class="btn btn-surface"
+                            style="width:100%;height:48px;border-radius:var(--radius-xl);font-size:0.875rem;color:#1D2B3A;"
+                            onclick="showToast('You're on the list! We'll notify you. ✅')">
+                            Notify me when stores join nearby
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Bottom Nav -->
+        <!-- Bottom Nav -->
+        <nav class="bottom-nav">
+            <a data-nav-page="browse" onclick="navigate('browse')" class="active">
+                <span class="material-symbols-outlined icon-fill">home</span>
+                <span class="label-sm">Home</span>
+            </a>
+            <a data-nav-page="impact" onclick="navigate('impact')">
+                <span class="material-symbols-outlined">eco</span>
+                <span class="label-sm">Impact</span>
+            </a>
+            <a onclick="showToast('Account coming soon!')">
+                <span class="material-symbols-outlined">person</span>
+                <span class="label-sm">Account</span>
+            </a>
+        </nav>
+
+    </div><!-- /page-browse -->
+
+
+    <!-- ═══════════════════════════════════════════════════
+     PAGE 3: PRODUCT DETAIL
+═════════════════════════════════════════════════════ -->
+    <div id="page-product" class="page">
+
+        <!-- Top Bar -->
+        <header class="top-bar" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+                <button class="back-btn" onclick="navigate('browse')" aria-label="Back">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <img src="logo.png"
+                    alt="Sur+" class="top-bar-logo" />
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div class="persona-toggle" onclick="togglePersona()" data-role="resident" title="Toggle persona">
+                    <div class="toggle-bg"></div>
+                    <span class="toggle-label resident">C</span>
+                    <span class="toggle-label retailer">R</span>
+                </div>
+                <button class="top-bar-icon" aria-label="Notifications" onclick="showToast('No new notifications.')">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="scrollable-page"
+            style="max-width:960px;margin:0 auto;padding-left:1rem;padding-right:1rem;padding-bottom:120px;">
+
+            <!-- Desktop two-col layout -->
+            <div style="display:grid;grid-template-columns:1fr;gap:2rem;margin-top:1rem;">
+                <div style="display:grid;grid-template-columns:1fr;gap:2rem;" id="product-grid">
+
+                    <!-- Hero image -->
+                    <div class="product-hero">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIbFZNyqfg6Cu6Bp5zP7a2op8udujdzC4yaHwlo3KXWJhSa2byoEbVxw2WPHrFDCLdadljBDjF88yjrmgb2Xq8Kqy5RGPq97vo-9xXd5sK66NlTY9NgHnBsP9a6QP0kL3Y8mXmwgXmPThaenMZgQ798cIbdkEQEzoY5JyflBlGwaqejrC9go9oSBct9-YJTxCn0s7ItVUVW5nJhwRPcDlPhWzCwAPHcQVi6zHMcfP9LZJSzYzBL-ZXGTno2OsGVGvrF1p1ymt-DZM"
+                            alt="Mixed Pastry Bag" style="width:100%;height:100%;object-fit:cover;" />
+                    </div>
+
+                    <!-- Info column -->
+                    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+                        <!-- Title & price -->
+                        <div>
+                            <h1
+                                style="font-family:var(--font-headline);font-size:clamp(1.75rem,4vw,3rem);font-weight:800;color:var(--color-primary-container);letter-spacing:-0.01em;line-height:1.15;margin-bottom:0.75rem;">
+                                Mixed Pastry Bag (Large)
+                            </h1>
+                            <p style="color:var(--color-on-surface-variant);line-height:1.6;font-weight:500;">
+                                A curated selection of our finest surplus pastries, baked fresh this morning and ready
+                                for a new home.
+                            </p>
+                        </div>
+                        <div style="display:flex;align-items:baseline;gap:1rem;">
+                            <span style="font-size:2.5rem;font-weight:900;color:var(--color-primary-container);">AED
+                                4.20</span>
+                            <span style="font-size:1.125rem;text-decoration:line-through;color:#9ca3af;">AED
+                                15.00</span>
+                        </div>
+
+                        <!-- Impact + expiry chips -->
+                        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                            <div
+                                style="background:var(--color-tertiary-fixed);padding:1rem 1.5rem;border-radius:var(--radius-xl);display:flex;align-items:center;gap:0.75rem;">
+                                <span class="material-symbols-outlined icon-fill"
+                                    style="color:var(--color-on-tertiary-fixed-variant);">eco</span>
+                                <span
+                                    style="font-size:1rem;font-weight:700;color:var(--color-on-tertiary-fixed);">Prevents
+                                    1.2 kg CO₂</span>
+                            </div>
+                            <div
+                                style="background:var(--color-primary-container);padding:1rem 1.5rem;border-radius:var(--radius-xl);display:flex;align-items:center;justify-content:space-between;">
+                                <div style="display:flex;align-items:center;gap:0.5rem;">
+                                    <span class="material-symbols-outlined"
+                                        style="color:var(--color-primary-fixed-dim);">timer</span>
+                                    <span class="label-sm" style="color:rgba(255,255,255,0.7);">EXPIRES ON</span>
+                                </div>
+                                <span
+                                    style="font-family:var(--font-headline);font-size:1.25rem;font-weight:800;color:white;letter-spacing:0.05em;">24/10/26</span>
+                            </div>
+                        </div>
+
+                        <!-- Details & allergens -->
+                        <div
+                            style="background:var(--color-surface-container-low);padding:2rem;border-radius:var(--radius-3xl);">
+                            <div style="margin-bottom:1.5rem;">
+                                <h2 class="label-md" style="color:var(--color-primary-container);margin-bottom:1rem;">
+                                    Potential Items</h2>
+                                <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;">
+                                    <li
+                                        style="display:flex;align-items:center;gap:0.75rem;color:var(--color-on-surface-variant);font-weight:500;">
+                                        <span
+                                            style="width:6px;height:6px;border-radius:50%;background:#539072;flex-shrink:0;"></span>
+                                        Butter Croissants &amp; Pain au Chocolat
+                                    </li>
+                                    <li
+                                        style="display:flex;align-items:center;gap:0.75rem;color:var(--color-on-surface-variant);font-weight:500;">
+                                        <span
+                                            style="width:6px;height:6px;border-radius:50%;background:#539072;flex-shrink:0;"></span>
+                                        Fruit Danishes &amp; Almond Twists
+                                    </li>
+                                    <li
+                                        style="display:flex;align-items:center;gap:0.75rem;color:var(--color-on-surface-variant);font-weight:500;">
+                                        <span
+                                            style="width:6px;height:6px;border-radius:50%;background:#539072;flex-shrink:0;"></span>
+                                        Artisanal Muffins &amp; Scones
+                                    </li>
+                                    <li
+                                        style="display:flex;align-items:center;gap:0.75rem;color:var(--color-on-surface-variant);font-weight:500;">
+                                        <span
+                                            style="width:6px;height:6px;border-radius:50%;background:#539072;flex-shrink:0;"></span>
+                                        Seasonal Pastry Specials
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="padding-top:1.25rem;border-top:1px solid rgba(196,198,204,0.2);">
+                                <h2 class="label-md"
+                                    style="color:var(--color-primary-container);margin-bottom:0.75rem;">Allergens</h2>
+                                <div class="allergen-badge">
+                                    <span class="material-symbols-outlined icon-fill"
+                                        style="font-size:1rem;">warning</span>
+                                    Contains Gluten, Dairy, &amp; Nuts
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map / location -->
+                        <div style="display:flex;flex-direction:column;gap:1rem;">
+                            <div
+                                style="position:relative;border-radius:var(--radius-3xl);overflow:hidden;aspect-ratio:16/9;">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzozaZKVLBfhh9kgC2LLO4ZKiCv9gC-OhjwMct3miuj43Of2e_CFXAWfogi7tw7QTU5nvk87UpTJxvH-X2RkNc5RoNA4KU7d8dJ2wbF96iDx3INwJzGIzwJdp3VSwBqnzUVHrjCztQmGt9ztUodiH_JsKUO9piqBbs9_1gZNduYXdHLHuQWGPyoYsETTO7i4dKBszNm-TWVCdzzr5ahGNirnMV2tHUVAbRhzt-ySG4-zBBRKoNE68aWygeHPEr2Ml_weoWTw7OZkA"
+                                    alt="Map" style="width:100%;height:100%;object-fit:cover;" />
+                                <div
+                                    style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,27,42,0.4),transparent);">
+                                </div>
+                                <div
+                                    style="position:absolute;bottom:1rem;left:1rem;right:1rem;background:white;border-radius:var(--radius-xl);padding:1rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+                                    <div>
+                                        <div class="label-sm"
+                                            style="color:var(--color-on-surface-variant);margin-bottom:0.125rem;">
+                                            Pick-up Location</div>
+                                        <div
+                                            style="font-family:var(--font-headline);font-weight:700;color:var(--color-primary-container);">
+                                            Blueberry Hills, Downtown</div>
+                                    </div>
+                                    <div
+                                        style="background:var(--color-primary-container);color:white;padding:0.25rem 0.625rem;border-radius:var(--radius-lg);font-size:0.75rem;font-weight:800;">
+                                        1.2 KM</div>
+                                </div>
+                            </div>
+                            <div
+                                style="display:flex;align-items:center;justify-content:space-between;padding:1.25rem;background:rgba(225,227,228,0.4);border-radius:var(--radius-3xl);">
+                                <div style="display:flex;align-items:center;gap:1rem;">
+                                    <div
+                                        style="width:48px;height:48px;border-radius:50%;background:var(--color-primary-container);display:flex;align-items:center;justify-content:center;">
+                                        <span class="material-symbols-outlined" style="color:white;">storefront</span>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight:700;color:var(--color-primary-container);">Blueberry
+                                            Hills Bakery</div>
+                                        <div style="font-size:0.875rem;color:var(--color-on-surface-variant);">Closes at
+                                            7:30 PM</div>
+                                    </div>
+                                </div>
+                                <button
+                                    style="background:none;border:none;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background var(--transition-base);"
+                                    onmouseover="this.style.background='var(--color-surface-container-high)'"
+                                    onmouseout="this.style.background='none'"
+                                    onclick="showToast('Opening directions…')">
+                                    <span class="material-symbols-outlined"
+                                        style="color:var(--color-primary-container);">directions</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Sticky Reserve button -->
+        <div class="checkout-footer">
+            <div style="max-width:960px;margin:0 auto;">
+                <button class="btn btn-secondary-green"
+                    style="width:100%;height:56px;border-radius:var(--radius-xl);font-size:1rem;" onclick="reserve()">
+                    Reserve — AED 4.20
+                </button>
+            </div>
+        </div>
+
+    </div><!-- /page-product -->
+
+
+    <!-- ═══════════════════════════════════════════════════
+     PAGE 4: SMART CHECKOUT
+═════════════════════════════════════════════════════ -->
+    <div id="page-checkout" class="page">
+
+        <!-- Top Bar -->
+        <header class="top-bar" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+                <button class="back-btn" onclick="navigate('product')" aria-label="Back">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <img src="logo.png"
+                    alt="Sur+" class="top-bar-logo" />
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+                <div class="persona-toggle" onclick="togglePersona()" data-role="resident" title="Toggle persona">
+                    <div class="toggle-bg"></div>
+                    <span class="toggle-label resident">C</span>
+                    <span class="toggle-label retailer">R</span>
+                </div>
+                <span style="color:white;font-weight:500;font-size:0.875rem;">Checkout</span>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="scrollable-page"
+            style="max-width:640px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem;padding-bottom:120px;">
+
+            <!-- Order Summary -->
+            <section style="margin-top:1rem;">
+                <h2
+                    style="font-family:var(--font-headline);font-size:1.25rem;font-weight:700;color:var(--color-primary-container);margin-bottom:1rem;">
+                    Order Summary</h2>
+                <div style="background:white;border-radius:var(--radius-xl);padding:1rem;">
+                    <div style="display:flex;gap:0.875rem;align-items:flex-start;">
+                        <!-- Image -->
+                        <div style="position:relative;width:72px;height:72px;flex-shrink:0;">
+                            <div style="width:100%;height:100%;border-radius:var(--radius-lg);overflow:hidden;">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIbFZNyqfg6Cu6Bp5zP7a2op8udujdzC4yaHwlo3KXWJhSa2byoEbVxw2WPHrFDCLdadljBDjF88yjrmgb2Xq8Kqy5RGPq97vo-9xXd5sK66NlTY9NgHnBsP9a6QP0kL3Y8mXmwgXmPThaenMZgQ798cIbdkEQEzoY5JyflBlGwaqejrC9go9oSBct9-YJTxCn0s7ItVUVW5nJhwRPcDlPhWzCwAPHcQVi6zHMcfP9LZJSzYzBL-ZXGTno2OsGVGvrF1p1ymt-DZM"
+                                    alt="Pastry" style="width:100%;height:100%;object-fit:cover;" />
+                            </div>
+                            <div
+                                style="position:absolute;top:0;left:0;background:var(--color-secondary-fixed);color:var(--color-on-secondary-container);font-size:0.5rem;font-weight:800;padding:0.2rem 0.375rem;border-radius:0 0 var(--radius-sm) 0;text-transform:uppercase;letter-spacing:0.05em;">
+                                72% OFF</div>
+                        </div>
+                        <!-- Details -->
+                        <div style="flex:1;min-width:0;">
+                            <h3
+                                style="font-family:var(--font-headline);font-weight:700;font-size:0.9375rem;color:var(--color-primary-container);line-height:1.3;margin-bottom:0.25rem;">
+                                Mixed Pastry Bag (Large)</h3>
+                            <p
+                                style="font-size:0.6875rem;color:var(--color-on-surface-variant);margin-bottom:0.625rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                Blueberry Hills Bakery • Downtown Dubai</p>
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <!-- Price -->
+                                <div style="display:flex;align-items:baseline;gap:0.5rem;">
+                                    <span
+                                        style="font-size:0.8125rem;font-weight:500;color:var(--color-secondary);">AED</span>
+                                    <span
+                                        style="font-size:1.25rem;font-weight:700;color:var(--color-secondary);">4.20</span>
+                                    <span
+                                        style="font-size:0.625rem;color:var(--color-on-surface-variant);text-decoration:line-through;">AED
+                                        15.00</span>
+                                </div>
+                                <!-- Stepper -->
+                                <div class="stepper">
+                                    <button class="stepper-btn minus" onclick="changeQty(-1)" aria-label="Remove one">
+                                        <span class="material-symbols-outlined" style="font-size:0.75rem;">remove</span>
+                                    </button>
+                                    <span class="stepper-count" id="cart-qty">1</span>
+                                    <button class="stepper-btn plus" onclick="changeQty(1)" aria-label="Add one">
+                                        <span class="material-symbols-outlined" style="font-size:0.75rem;">add</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Collection & Payment -->
+            <section style="margin-top:1.5rem;">
+                <div style="display:grid;grid-template-columns:1fr;gap:0.875rem;">
+                    <!-- Collection Point -->
+                    <div class="info-card mint-accent">
+                        <div
+                            style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+                            <span class="label-sm" style="color:var(--color-on-surface-variant);">Collection
+                                Point</span>
+                            <button
+                                style="background:none;border:none;cursor:pointer;font-size:0.75rem;font-weight:700;color:var(--color-secondary);"
+                                onclick="showToast('Change collection point coming soon.')">Change</button>
+                        </div>
+                        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+                            <span class="material-symbols-outlined"
+                                style="color:var(--color-secondary);">location_on</span>
+                            <div>
+                                <div style="font-weight:700;color:var(--color-primary-container);">Blueberry Hills,
+                                    Downtown</div>
+                                <div
+                                    style="font-size:0.875rem;color:var(--color-on-surface-variant);line-height:1.4;margin-top:0.125rem;">
+                                    Sheikh Zayed Road, Safa Park Exit, Dubai</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Payment Method -->
+                    <div class="info-card navy-accent">
+                        <div
+                            style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+                            <span class="label-sm" style="color:var(--color-on-surface-variant);">Payment Method</span>
+                            <button
+                                style="background:none;border:none;cursor:pointer;font-size:0.75rem;font-weight:700;color:var(--color-secondary);"
+                                onclick="showToast('Change payment coming soon.')">Edit</button>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:0.75rem;">
+                            <span class="material-symbols-outlined"
+                                style="color:var(--color-primary-container);">credit_card</span>
+                            <div>
+                                <div style="font-weight:700;color:var(--color-primary-container);">•••• 4242</div>
+                                <div style="font-size:0.875rem;color:var(--color-on-surface-variant);">Expires 12/26
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CO₂ impact -->
+            <section style="margin-top:1.5rem;">
+                <div
+                    style="display:flex;align-items:center;gap:1rem;padding:1rem;background:rgba(177,240,206,0.3);border-radius:var(--radius-xl);">
+                    <span class="material-symbols-outlined icon-fill"
+                        style="color:var(--color-secondary);font-size:2rem;">eco</span>
+                    <p style="font-size:0.875rem;font-weight:500;color:var(--color-on-secondary-container);">
+                        This purchase prevents <strong>1.2 kg of CO₂</strong> emissions.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Price breakdown -->
+            <section
+                style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--color-surface-container-high);">
+                <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                    <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                        <span style="color:var(--color-on-surface-variant);">Subtotal (Market Price)</span>
+                        <span style="color:var(--color-on-surface-variant);text-decoration:line-through;">AED
+                            15.00</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                        <span style="color:var(--color-on-surface-variant);">Sur+ Community Saving</span>
+                        <span style="color:var(--color-secondary);font-weight:700;">− AED 10.80</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:0.875rem;">
+                        <span style="color:var(--color-on-surface-variant);">Service Fee</span>
+                        <span style="color:var(--color-primary-container);">AED 0.00</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:1rem;">
+                        <span
+                            style="font-family:var(--font-headline);font-size:1.25rem;font-weight:800;color:var(--color-primary-container);">Total
+                            Due</span>
+                        <span id="checkout-total"
+                            style="font-family:var(--font-headline);font-size:1.5rem;font-weight:900;color:var(--color-secondary);">AED
+                            4.20</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Sticky confirm -->
+        <div class="checkout-footer">
+            <div style="max-width:640px;margin:0 auto;">
+                <button class="btn btn-primary"
+                    style="width:100%;height:64px;border-radius:var(--radius-xl);font-size:1rem;gap:0.75rem;"
+                    onclick="confirmPurchase()">
+                    <span class="material-symbols-outlined icon-fill">verified_user</span>
+                    Confirm Purchase •
+                    <span id="checkout-btn-total">AED 4.20</span>
+                </button>
+                <p
+                    style="text-align:center;font-size:0.625rem;color:var(--color-on-surface-variant);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.625rem;">
+                    Secure encrypted transaction by Sur+ Vault</p>
+            </div>
+        </div>
+
+    </div><!-- /page-checkout -->
+
+
+    <!-- ═══════════════════════════════════════════════════
+     PAGE 5: IMPACT DASHBOARD
+═════════════════════════════════════════════════════ -->
+    <div id="page-impact" class="page">
+
+        <!-- Top Bar -->
+        <header class="top-bar" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:1rem;">
+                <!-- Hamburger removed -->
+                <img src="logo.png" alt="Sur+" class="top-bar-logo" />
+            </div>
+            <!-- Desktop nav -->
+            <nav class="hide-sm" style="display:flex;align-items:center;gap:0.5rem;">
+                <a class="top-bar-nav-link" onclick="navigate('browse')" data-nav-page="browse">Home</a>
+                <a class="top-bar-nav-link active" onclick="navigate('impact')" data-nav-page="impact">Impact</a>
+                <a class="top-bar-nav-link" onclick="showToast('Account coming soon!')">Account</a>
+            </nav>
+            <div class="persona-toggle" onclick="togglePersona()" data-role="resident" title="Toggle persona">
+                <div class="toggle-bg"></div>
+                <span class="toggle-label resident">C</span>
+                <span class="toggle-label retailer">R</span>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="scrollable-page" style="max-width:800px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem;">
+
+            <!-- Collectible card -->
+            <section style="display:flex;flex-direction:column;align-items:center;margin-top:1rem;">
+                <div class="collectible-card" style="width:100%;max-width:280px;height:340px;">
+                    <div style="position:absolute;inset:0;" class="rare-gradient"></div>
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent,rgba(255,255,255,0.1));">
+                    </div>
+                    <div class="shimmer"></div>
+                    <div
+                        style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1.5rem;z-index:2;color:white;">
+                        <!-- Tier badge -->
+                        <div
+                            style="background:#8b5cf6;border:1px solid rgba(255,255,255,0.4);padding:0.25rem 1.5rem;border-radius:999px;">
+                            <span style="font-size:0.75rem;font-weight:900;letter-spacing:0.2em;">RARE</span>
+                        </div>
+                        <!-- Icon + stat -->
+                        <div
+                            style="display:flex;flex-direction:column;align-items:center;gap:1rem;flex:1;justify-content:center;">
+                            <div
+                                style="position:relative;width:100px;height:100px;background:rgba(255,255,255,0.1);backdrop-filter:blur(16px);border-radius:50%;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,255,255,0.3);">
+                                <div style="position:absolute;inset:0;border-radius:50%;background:rgba(255,255,255,0.2);"
+                                    class="ping-anim"></div>
+                                <span class="material-symbols-outlined icon-fill"
+                                    style="font-size:3.5rem;color:white;filter:drop-shadow(0 0 15px rgba(255,255,255,0.8));">shield</span>
+                            </div>
+                            <div style="text-align:center;">
+                                <h2
+                                    style="font-family:var(--font-headline);font-size:1.875rem;font-weight:900;letter-spacing:-0.02em;line-height:1;margin-bottom:0.25rem;">
+                                    <span data-count="42.5" data-decimals="1">42.5</span> kg saved
+                                </h2>
+                                <p
+                                    style="font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(219,234,254,0.8);">
+                                    Rare</p>
+                            </div>
+                        </div>
+                        <!-- Quote -->
+                        <div
+                            style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem;width:100%;margin-bottom:0.5rem;">
+                            <p
+                                style="text-align:center;font-size:0.625rem;font-style:italic;color:rgba(255,255,255,0.7);line-height:1.5;">
+                                "Diverted enough food to feed 42 families for a day."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sticker album -->
+                <div style="margin-top:2rem;width:100%;max-width:320px;">
+                    <div
+                        style="display:flex;justify-content:space-between;gap:0.25rem;align-items:flex-end;margin-bottom:0.75rem;">
+                        <div class="sticker earned" style="background:linear-gradient(135deg,#9ca3af,#475569);">
+                            <span class="material-symbols-outlined icon-fill"
+                                style="color:white;font-size:0.875rem;">eco</span>
+                        </div>
+                        <div class="sticker earned" style="background:linear-gradient(135deg,#34d399,#0d9488);">
+                            <span class="material-symbols-outlined icon-fill"
+                                style="color:white;font-size:0.875rem;">park</span>
+                        </div>
+                        <div class="sticker active rare-gradient">
+                            <span class="material-symbols-outlined icon-fill"
+                                style="color:white;font-size:1rem;">shield</span>
+                        </div>
+                        <div class="sticker locked">
+                            <span class="material-symbols-outlined"
+                                style="color:rgba(139,92,246,0.4);font-size:0.875rem;">lock</span>
+                        </div>
+                        <div class="sticker locked" style="border-color:rgba(245,158,11,0.3);">
+                            <span class="material-symbols-outlined"
+                                style="color:rgba(245,158,11,0.4);font-size:0.875rem;">lock</span>
+                        </div>
+                        <div class="sticker locked" style="border-color:rgba(234,179,8,0.3);">
+                            <span class="material-symbols-outlined"
+                                style="color:rgba(234,179,8,0.3);font-size:0.875rem;">lock</span>
+                        </div>
+                    </div>
+                    <p
+                        style="text-align:center;font-size:0.6875rem;font-weight:700;color:var(--color-on-surface-variant);font-style:italic;">
+                        7.5 kg until Epic — keep going!</p>
+                </div>
+            </section>
+
+            <!-- Stats grid -->
+            <section
+                style="padding:1.5rem 0;border-top:1px solid rgba(196,198,204,0.3);border-bottom:1px solid rgba(196,198,204,0.3);margin-top:2rem;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+                    <!-- CO₂ -->
+                    <div
+                        style="display:flex;flex-direction:column;align-items:center;text-align:center;border-right:1px solid rgba(196,198,204,0.3);padding:0 0.5rem;">
+                        <span style="font-size:1.75rem;line-height:1;">🌿</span>
+                        <h3
+                            style="font-family:var(--font-headline);font-size:1.5rem;font-weight:900;letter-spacing:-0.02em;color:var(--color-primary-container);line-height:1;margin-top:0.25rem;">
+                            <span data-count="106.2" data-decimals="1">106.2</span><span
+                                style="font-size:0.625rem;font-weight:700;text-transform:uppercase;margin-left:2px;">kg</span>
+                        </h3>
+                        <p style="font-size:0.6875rem;color:var(--color-on-surface);margin-top:0.25rem;">CO₂ emissions
+                            avoided</p>
+                        <p
+                            style="font-size:0.625rem;font-style:italic;color:var(--color-on-surface-variant);font-weight:500;margin-top:0.375rem;">
+                            Equal to 420 km not driven</p>
+                    </div>
+                    <!-- Meals -->
+                    <div
+                        style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 0.5rem;">
+                        <span style="font-size:1.75rem;line-height:1;">🍽️</span>
+                        <h3
+                            style="font-family:var(--font-headline);font-size:1.5rem;font-weight:900;letter-spacing:-0.02em;color:var(--color-primary-container);line-height:1;margin-top:0.25rem;">
+                            <span data-count="84" data-decimals="0">84</span>
+                        </h3>
+                        <p style="font-size:0.6875rem;color:var(--color-on-surface);margin-top:0.25rem;">Perfect meals
+                            rescued</p>
+                        <p
+                            style="font-size:0.625rem;font-style:italic;color:var(--color-on-surface-variant);font-weight:500;margin-top:0.375rem;">
+                            12 local bakeries supported</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboard + Community card -->
+            <section style="margin-top:2rem;display:grid;grid-template-columns:1fr;gap:2rem;">
+
+                <!-- Leaderboard -->
+                <div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+                        <h2
+                            style="font-family:var(--font-headline);font-size:1.25rem;font-weight:700;color:var(--color-primary-container);">
+                            Monthly impact circle</h2>
+                        <button class="chip-secondary" style="border:none;cursor:pointer;"
+                            onclick="showToast('Invite link copied! 🔗')">Invite friends</button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                        <!-- Me -->
+                        <div class="leaderboard-item me">
+                            <div style="display:flex;align-items:center;gap:1rem;">
+                                <span
+                                    style="font-size:0.875rem;font-weight:900;color:var(--color-secondary);width:1rem;text-align:center;">1</span>
+                                <img src="https://ui-avatars.com/api/?name=You&background=10B981&color=fff&rounded=true&bold=true"
+                                    alt="You" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+                                <div>
+                                    <div
+                                        style="font-size:0.875rem;font-weight:700;color:var(--color-primary-container);">
+                                        You</div>
+                                    <div style="font-size:0.6875rem;color:var(--color-on-surface-variant);">12.8 kg this
+                                        month</div>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined"
+                                style="color:var(--color-secondary);">trending_up</span>
+                        </div>
+                        <!-- Sarah -->
+                        <div class="leaderboard-item peer">
+                            <div style="display:flex;align-items:center;gap:1rem;">
+                                <span
+                                    style="font-size:0.875rem;font-weight:700;color:var(--color-on-surface-variant);width:1rem;text-align:center;">2</span>
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVTUe_79_mP6t52umCVyA2q7OhmFNkAWlNGFfYmzyR-aJci2-T6gFgg0vSo6D5xjVsfU01pt-Ov4_PLOS5RSeI0UVLK9ID_ftVjuD8Ae93hkhn_Pjk1F3LdexS7vkJGRq-9iTPPerrfqMIU5VQd7JT7Q-TkdiUbwezLSwWuHkypWm6_WYtUMkvPiXx30zR8a89UXqR3hMIrwEzhUv-4DLAm01dxUWSpWofzb238cSPLAc8ZPpPRiDv2l2BK8O4FYD0tTAiYoOYmVs"
+                                    alt="Sarah" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+                                <div>
+                                    <div
+                                        style="font-size:0.875rem;font-weight:700;color:var(--color-primary-container);">
+                                        Sarah J.</div>
+                                    <div style="font-size:0.6875rem;color:var(--color-on-surface-variant);">9.4 kg this
+                                        month</div>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined"
+                                style="color:rgba(68,71,76,0.3);">horizontal_rule</span>
+                        </div>
+                        <!-- Omar -->
+                        <div class="leaderboard-item peer">
+                            <div style="display:flex;align-items:center;gap:1rem;">
+                                <span
+                                    style="font-size:0.875rem;font-weight:700;color:var(--color-on-surface-variant);width:1rem;text-align:center;">3</span>
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6NtUi-YvQ2Wpaf7iGwEVuRGRO2kWVO6DfEQzdLhqPXqdvJdZSjaj78CX11a4UyyJj1tm2bEV6m4Kx_Drbr8wDuOlOFomXUhUTMhxuH-UjU6qe0m4MN4gezAYJIJNHT3rqAJTB135FojemdgaP6fU0QVO-RSQuBWiIrIq4b-jFbjuPBFialcXo_h8pVeWVUYRNQWSGvi74-cGLyLjUjwGKcXadwqhjyOU4Ynh8m1-T0kDmy2NdN0MuVErv5jmjcoGN4Xw4H7_HcP0"
+                                    alt="Omar" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+                                <div>
+                                    <div
+                                        style="font-size:0.875rem;font-weight:700;color:var(--color-primary-container);">
+                                        Omar K.</div>
+                                    <div style="font-size:0.6875rem;color:var(--color-on-surface-variant);">8.1 kg this
+                                        month</div>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined"
+                                style="color:var(--color-error);">trending_down</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community card -->
+                <div
+                    style="background:var(--color-primary-container);color:white;padding:1.5rem;border-radius:var(--radius-xl);display:flex;flex-direction:column;justify-content:space-between;">
+                    <div>
+                        <span
+                            style="color:var(--color-secondary-fixed);font-weight:700;font-size:0.75rem;letter-spacing:0.05em;">Global
+                            community</span>
+                        <h3
+                            style="font-family:var(--font-headline);font-size:1.25rem;font-weight:700;margin-top:0.375rem;line-height:1.3;">
+                            Together, we've saved a Blue Whale.</h3>
+                        <p style="color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.75rem;line-height:1.6;">The
+                            Sur+ community has collectively diverted 190,000 kg of food waste this year.</p>
+                    </div>
+                    <div style="margin-top:2rem;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;margin-bottom:0.75rem;">
+                            <span style="color:rgba(255,255,255,0.4);">Target: 250k KG</span>
+                            <span style="font-weight:800;font-size:0.9375rem;">76% reached</span>
+                        </div>
+                        <div class="community-bar">
+                            <div class="community-bar-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- Bottom Nav -->
+        <nav class="bottom-nav">
+            <a data-nav-page="browse" onclick="navigate('browse')">
+                <span class="material-symbols-outlined">home</span>
+                <span class="label-sm">Home</span>
+            </a>
+            <a data-nav-page="impact" onclick="navigate('impact')" class="active">
+                <span class="material-symbols-outlined icon-fill">eco</span>
+                <span class="label-sm">Impact</span>
+            </a>
+            <a onclick="showToast('Account coming soon!')">
+                <span class="material-symbols-outlined">person</span>
+                <span class="label-sm">Account</span>
+            </a>
+        </nav>
+
+    </div><!-- /page-impact -->
+
+
+    <!-- ═══════════════════════════════════════════════════
+     PAGE 6: RETAILER DASHBOARD
+═════════════════════════════════════════════════════ -->
+    <div id="page-retailer" class="page">
+
+        <!-- Top Bar -->
+        <header class="top-bar" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:1rem;">
+                <!-- Hamburger removed -->
+                <img src="logo.png" alt="Sur+" class="top-bar-logo" />
+            </div>
+            <div class="persona-toggle" onclick="togglePersona()" data-role="resident" title="Toggle persona">
+                <div class="toggle-bg"></div>
+                <span class="toggle-label resident">C</span>
+                <span class="toggle-label retailer">R</span>
+            </div>
+        </header>
+
+        <!-- Desktop sidebar -->
+        <aside class="sidebar" style="display:none;" id="retailer-sidebar">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2.5rem;padding:0 0.5rem;">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUlVOoHf6QKyYqdPSBgiRrK0m8FZ6XI_II5Aj9eJlBIwYA6TEpLo1wzcYKTRTG_MMUIzxdswgQ_QZfuk56eXHsqUUVUCf5u2c5VkRyFUwCJAps4oXfFIZkonK4NHqxbY-lUz7RVsqq1mj3y8Mlsw3MpHegI7T19Hohu_YAiBan3uwipRnEmMJrI1gSxfaKns0DbnEEzWXZnVSLS4-1uB5XU6mJT5sVdfC2kfgGJDd_Dtm_Vgzy7nAK9tbZw3e9Tm2v5MDXsHu2dGw"
+                    alt="Profile" style="width:44px;height:44px;border-radius:50%;object-fit:cover;" />
+                <div>
+                    <div
+                        style="font-family:var(--font-headline);font-size:0.875rem;font-weight:700;color:var(--color-on-surface);line-height:1.2;">
+                        Green Grocer Central</div>
+                    <div class="label-sm" style="color:var(--color-on-surface-variant);margin-top:0.125rem;">Sur+
+                        Partner</div>
+                </div>
+            </div>
+            <nav style="display:flex;flex-direction:column;gap:0.25rem;">
+                <a class="sidebar-nav-item active" onclick="navigate('retailer')"><span class="material-symbols-outlined">dashboard</span>
+                    Dashboard</a>
+                <a class="sidebar-nav-item" onclick="showToast('Listings coming soon.')"><span
+                        class="material-symbols-outlined">list_alt</span> Listings</a>
+                <a class="sidebar-nav-item" onclick="showToast('Account coming soon.')"><span
+                        class="material-symbols-outlined">person</span> Account</a>
+            </nav>
+            <div
+                style="margin-top:auto;background:var(--color-surface-container-low);border-radius:var(--radius-xl);padding:1rem;">
+                <div class="label-sm" style="color:var(--color-on-surface-variant);margin-bottom:0.25rem;">Account Type
+                </div>
+                <div style="font-size:0.875rem;font-weight:700;color:var(--color-on-surface);">Premium Account</div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="scrollable-page retailer-main"
+            style="max-width:900px;margin:0 auto;padding-left:1rem;padding-right:1rem;padding-bottom:100px;"
+            id="retailer-main">
+
+            <!-- Add new item CTA -->
+            <div style="margin-top:1rem;margin-bottom:1.5rem;">
+                <button class="btn btn-secondary-green"
+                    style="width:100%;height:48px;border-radius:var(--radius-xl);letter-spacing:0.08em;font-size:0.875rem;"
+                    onclick="showToast('New item form coming soon! 📦')">
+                    <span class="material-symbols-outlined">add</span> ADD NEW ITEM
+                </button>
+            </div>
+
+            <!-- Hero stats row -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+
+                <!-- Impact hero -->
+                <div
+                    style="background:var(--color-primary-container);color:white;border-radius:1.5rem;padding:1.25rem;display:flex;flex-direction:column;justify-content:space-between;min-height:176px;position:relative;overflow:hidden;">
+                    <div style="position:relative;z-index:2;">
+                        <div
+                            style="display:inline-block;background:rgba(0,0,0,0.35);padding:0.25rem 0.75rem;border-radius:999px;font-size:0.625rem;font-weight:700;margin-bottom:0.625rem;letter-spacing:0.05em;">
+                            Sustainability milestone</div>
+                        <h2
+                            style="font-family:var(--font-headline);font-size:clamp(1.125rem,3vw,1.5rem);font-weight:900;line-height:1.2;">
+                            1,240 kg CO₂ prevented</h2>
+                        <p
+                            style="color:rgba(255,255,255,0.7);font-size:0.6875rem;margin-top:0.5rem;line-height:1.4;font-weight:500;">
+                            Diverted 3.2 tons of food waste this quarter.</p>
+                    </div>
+                    <div style="position:absolute;right:-1rem;bottom:-1rem;opacity:0.08;pointer-events:none;">
+                        <span class="material-symbols-outlined" style="font-size:7rem;">eco</span>
+                    </div>
+                </div>
+
+                <!-- Efficiency donut -->
+                <div
+                    style="background:var(--color-tertiary-fixed);border-radius:1.5rem;padding:1.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:176px;">
+                    <div class="label-sm" style="color:var(--color-on-tertiary-fixed-variant);margin-bottom:0.5rem;">
+                        Surplus efficiency</div>
+                    <div style="position:relative;width:80px;height:80px;margin-bottom:0.5rem;"
+                        class="circular-progress">
+                        <svg width="80" height="80">
+                            <circle cx="40" cy="40" r="34" fill="transparent" stroke="rgba(88,67,41,0.1)"
+                                stroke-width="8" />
+                            <circle cx="40" cy="40" r="34" fill="transparent"
+                                stroke="var(--color-on-tertiary-fixed-variant)" stroke-width="8"
+                                stroke-dasharray="213.6" stroke-dashoffset="34.2" stroke-linecap="round" />
+                        </svg>
+                        <div
+                            style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-headline);font-size:1.25rem;font-weight:900;color:var(--color-on-tertiary-fixed-variant);">
+                            84%</div>
+                    </div>
+                    <div style="font-size:0.75rem;font-weight:700;color:var(--color-on-tertiary-fixed-variant);">Surplus
+                        Rate 84%</div>
+                    <div style="font-size:0.625rem;font-weight:700;color:#2D6A4F;margin-top:0.25rem;">+12% vs last month
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bento: listings + chart + insight -->
+            <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
+
+                <!-- Active listings -->
+                <div>
+                    <div
+                        style="display:flex;align-items:center;justify-content:space-between;padding:0 0.25rem;margin-bottom:1rem;">
+                        <h3 style="font-family:var(--font-headline);font-size:1.25rem;font-weight:700;">Active Listings
+                        </h3>
+                        <button
+                            style="background:none;border:none;cursor:pointer;color:var(--color-secondary);font-size:0.875rem;font-weight:700;"
+                            onclick="showToast('All listings coming soon.')">View All</button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:0.875rem;">
+
+                        <!-- Listing 1 -->
+                        <div class="card"
+                            style="padding:1.5rem;display:flex;align-items:center;gap:1.5rem;border-radius:var(--radius-3xl);">
+                            <div class="retailer-listing-img">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmHzCSso5y_kNTDOaLfgUwTGfOuEx-Jg3vN28hmD3wCyy9pLlPxZdId7FbiVvmRmwjNeC88DyvEmNycRxdfB2XHcoC55uCZPWtAa8oXkGK605YmlDU8ee4v1ZCrdzpmcPH_yg3R5h7n77r7EGfd2F8LbAd8a6taCnFMfjYP4kDVZuhj5M-7-wXNVlDyAu-9Qexg7v6PtBRCpL1KTbs5w_2B5_UXWNFbr5fTy_RXCvGrc-pYymQlHL3Bi8ESbPMf7Vp1EQdEVPza_U"
+                                    alt="Pastries" />
+                            </div>
+                            <div style="flex:1;min-width:0;">
+                                <div
+                                    style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">
+                                    <h4 style="font-family:var(--font-headline);font-size:1rem;font-weight:700;">Morning
+                                        Pastries Mix</h4>
+                                    <span
+                                        style="background:#ecfdf5;color:#065f46;padding:0.25rem 0.75rem;border-radius:999px;font-size:0.625rem;font-weight:700;white-space:nowrap;margin-left:0.5rem;">8
+                                        Units</span>
+                                </div>
+                                <div
+                                    style="display:flex;align-items:center;gap:0.375rem;font-size:0.875rem;color:#6b7280;margin-bottom:1rem;">
+                                    <span class="material-symbols-outlined" style="font-size:1rem;">payments</span>
+                                    <span style="font-weight:700;color:var(--color-on-surface);">AED 12.50</span>
+                                </div>
+                                <div
+                                    style="width:100%;background:#f1f5f9;height:6px;border-radius:999px;overflow:hidden;">
+                                    <div style="background:#10b981;height:100%;width:75%;border-radius:999px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Listing 2 -->
+                        <div class="card"
+                            style="padding:1.5rem;display:flex;align-items:center;gap:1.5rem;border-radius:var(--radius-3xl);">
+                            <div class="retailer-listing-img">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvqJp28X5gDdr8UpMK18FAGxK8iQc-iOUwFV0ijrxAaBu3SD1do9xWAlWO9Ov5oqA51nt9y5gP5BgAZcmT2j4RYZvcGRpJrl8xVzOMaOiOEujaz2s2L-TZmuoTF5pCaXQ9ibRHoGpYJQsacsqI4ORzrRdvBwHssdaZ1QGioQoHtqIOsLRm8wcc7WCvGWRPzoAYK3Sk0FyFelSTquYKE6dXdh2p-rJzVl8JgIAtgiyvF3y-fW4JVcOVD_IFF9VkFnWo1z4DRdNVx08"
+                                    alt="Organic Box" />
+                            </div>
+                            <div style="flex:1;min-width:0;">
+                                <div
+                                    style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">
+                                    <h4 style="font-family:var(--font-headline);font-size:1rem;font-weight:700;">Organic
+                                        Box</h4>
+                                    <span
+                                        style="background:#ecfdf5;color:#065f46;padding:0.25rem 0.75rem;border-radius:999px;font-size:0.625rem;font-weight:700;white-space:nowrap;margin-left:0.5rem;">5
+                                        Units</span>
+                                </div>
+                                <div
+                                    style="display:flex;align-items:center;gap:0.375rem;font-size:0.875rem;color:#6b7280;margin-bottom:1rem;">
+                                    <span class="material-symbols-outlined" style="font-size:1rem;">payments</span>
+                                    <span style="font-weight:700;color:var(--color-on-surface);">AED 24.00</span>
+                                </div>
+                                <div
+                                    style="width:100%;background:#f1f5f9;height:6px;border-radius:999px;overflow:hidden;">
+                                    <div style="background:#10b981;height:100%;width:50%;border-radius:999px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Chart + Insight -->
+                <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
+
+                    <!-- Bar chart -->
+                    <div
+                        style="background:var(--color-surface-container-low);border-radius:var(--radius-3xl);padding:2rem;">
+                        <h3
+                            style="font-family:var(--font-headline);font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;">
+                            <span class="material-symbols-outlined"
+                                style="color:var(--color-secondary);">bar_chart</span>
+                            7-Day Waste Reduction
+                        </h3>
+                        <div class="bar-chart">
+                            <div class="bar-chart-bar" data-bar-h="40%"></div>
+                            <div class="bar-chart-bar" data-bar-h="60%"></div>
+                            <div class="bar-chart-bar" data-bar-h="50%"></div>
+                            <div class="bar-chart-bar" data-bar-h="80%"></div>
+                            <div class="bar-chart-bar" data-bar-h="70%"></div>
+                            <div class="bar-chart-bar" data-bar-h="95%"></div>
+                            <div class="bar-chart-bar" data-bar-h="85%"></div>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;margin-top:0.75rem;">
+                            <span class="label-sm" style="color:#94a3b8;">Mon</span>
+                            <span class="label-sm" style="color:#94a3b8;">Tue</span>
+                            <span class="label-sm" style="color:#94a3b8;">Wed</span>
+                            <span class="label-sm" style="color:#94a3b8;">Thu</span>
+                            <span class="label-sm" style="color:#94a3b8;">Fri</span>
+                            <span class="label-sm" style="color:#94a3b8;">Sat</span>
+                            <span class="label-sm" style="color:#94a3b8;">Sun</span>
+                        </div>
+                    </div>
+
+                    <!-- Manager insight -->
+                    <div style="background:var(--color-secondary-fixed);border-radius:var(--radius-3xl);padding:2rem;">
+                        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+                            <div
+                                style="width:40px;height:40px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                                <span class="material-symbols-outlined"
+                                    style="color:var(--color-primary-container);">lightbulb</span>
+                            </div>
+                            <h3
+                                style="font-family:var(--font-headline);font-weight:700;color:var(--color-primary-container);">
+                                Manager's Insight</h3>
+                        </div>
+                        <p style="color:rgba(13,27,42,0.7);line-height:1.6;font-size:0.875rem;margin-bottom:1.5rem;">
+                            "Your bakery items sell 40% faster on Tuesdays. We suggest increasing your <strong>flash
+                                sale duration</strong> by 45 minutes to capture late-commuter traffic."
+                        </p>
+                        <button class="btn btn-surface"
+                            style="width:100%;border-radius:var(--radius-xl);height:48px;font-size:0.875rem;color:var(--color-primary-container);"
+                            onclick="showToast('Strategy applied! 🚀')">
+                            Apply Suggested Strategy
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Bottom Nav (mobile) -->
+        <nav class="bottom-nav">
+            <a data-nav-page="retailer" onclick="navigate('retailer')" class="active">
+                <span class="material-symbols-outlined icon-fill">dashboard</span>
+                <span class="label-sm">Dashboard</span>
+            </a>
+            <a onclick="showToast('Listings coming soon.')">
+                <span class="material-symbols-outlined">list_alt</span>
+                <span class="label-sm">Listings</span>
+            </a>
+            <a onclick="showToast('Account coming soon.')">
+                <span class="material-symbols-outlined">person</span>
+                <span class="label-sm">Account</span>
+            </a>
+        </nav>
+
+    </div><!-- /page-retailer -->
+
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+
+    <script>
+        // Show retailer sidebar on desktop
+        function initRetailerSidebar() {
+            const sidebar = document.getElementById('retailer-sidebar');
+            const main = document.getElementById('retailer-main');
+            if (window.innerWidth >= 1024) {
+                sidebar.style.display = 'flex';
+                main.style.marginLeft = '256px';
+            } else {
+                sidebar.style.display = 'none';
+                main.style.marginLeft = '0';
+            }
+        }
+        window.addEventListener('resize', () => {
+            if (currentPage === 'retailer') initRetailerSidebar();
+        });
+
+        // Extend page init to handle retailer sidebar
+        const origRetailerInit = pageInitFns.retailer;
+        pageInitFns.retailer = () => {
+            origRetailerInit();
+            setTimeout(initRetailerSidebar, 0);
+        };
+    </script>
+
+</body>
+
+</html>

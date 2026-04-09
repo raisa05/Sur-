@@ -279,6 +279,16 @@ body {
   z-index: 20;
 }
 
+#page-onboarding {
+  display: flex;
+  flex-direction: column;
+}
+
+#page-onboarding > main {
+  flex: 1;
+  min-height: 0;
+}
+
 .page-content,
 .scrollable-page {
   padding-top: calc(var(--nav-h) + 1rem);

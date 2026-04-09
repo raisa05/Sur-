@@ -29,6 +29,10 @@ function navigate(pageKey, options = {}) {
 
   // Scroll to top
   target.scrollTop = 0;
+  target.querySelectorAll('.scrollable-page').forEach((el) => {
+    el.scrollTop = 0;
+    el.scrollTo?.({ top: 0, left: 0, behavior: 'auto' });
+  });
   window.scrollTo(0, 0);
 
   // Update bottom nav active state

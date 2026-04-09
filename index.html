@@ -624,14 +624,14 @@
     <div id="page-browse" class="page">
 
         <!-- Top Bar -->
-        <header class="top-bar" style="justify-content:space-between;">
+        <header class="top-bar top-bar-with-nav" style="justify-content:space-between;">
             <div style="display:flex;align-items:center;gap:1rem;">
                 <!-- Hamburger removed -->
                 <img src="logo.png" alt="Sur+" class="top-bar-logo" style="cursor:pointer;"
                     onclick="navigate('onboarding')" />
             </div>
             <!-- Desktop nav -->
-            <nav class="hide-sm" style="display:flex;align-items:center;gap:0.5rem;">
+            <nav class="top-bar-nav">
                 <a class="top-bar-nav-link active" onclick="navigate('browse')" data-nav-page="browse">Home</a>
                 <a class="top-bar-nav-link" onclick="navigate('impact')" data-nav-page="impact">Impact</a>
                 <a class="top-bar-nav-link" onclick="showToast('Account coming soon!')">Account</a>
@@ -861,23 +861,6 @@
             </section>
 
         </main>
-
-        <!-- Bottom Nav -->
-        <!-- Bottom Nav -->
-        <nav class="bottom-nav">
-            <a data-nav-page="browse" onclick="navigate('browse')" class="active">
-                <span class="material-symbols-outlined icon-fill">home</span>
-                <span class="label-sm">Home</span>
-            </a>
-            <a data-nav-page="impact" onclick="navigate('impact')">
-                <span class="material-symbols-outlined">eco</span>
-                <span class="label-sm">Impact</span>
-            </a>
-            <a onclick="showToast('Account coming soon!')">
-                <span class="material-symbols-outlined">person</span>
-                <span class="label-sm">Account</span>
-            </a>
-        </nav>
 
     </div><!-- /page-browse -->
 
@@ -1268,14 +1251,14 @@
     <div id="page-impact" class="page">
 
         <!-- Top Bar -->
-        <header class="top-bar" style="justify-content:space-between;">
+        <header class="top-bar top-bar-with-nav" style="justify-content:space-between;">
             <div style="display:flex;align-items:center;gap:1rem;">
                 <!-- Hamburger removed -->
                 <img src="logo.png" alt="Sur+" class="top-bar-logo" style="cursor:pointer;"
                     onclick="navigate('onboarding')" />
             </div>
             <!-- Desktop nav -->
-            <nav class="hide-sm" style="display:flex;align-items:center;gap:0.5rem;">
+            <nav class="top-bar-nav">
                 <a class="top-bar-nav-link" onclick="navigate('browse')" data-nav-page="browse">Home</a>
                 <a class="top-bar-nav-link active" onclick="navigate('impact')" data-nav-page="impact">Impact</a>
                 <a class="top-bar-nav-link" onclick="showToast('Account coming soon!')">Account</a>
@@ -1513,22 +1496,6 @@
 
         </main>
 
-        <!-- Bottom Nav -->
-        <nav class="bottom-nav">
-            <a data-nav-page="browse" onclick="navigate('browse')">
-                <span class="material-symbols-outlined">home</span>
-                <span class="label-sm">Home</span>
-            </a>
-            <a data-nav-page="impact" onclick="navigate('impact')" class="active">
-                <span class="material-symbols-outlined icon-fill">eco</span>
-                <span class="label-sm">Impact</span>
-            </a>
-            <a onclick="showToast('Account coming soon!')">
-                <span class="material-symbols-outlined">person</span>
-                <span class="label-sm">Account</span>
-            </a>
-        </nav>
-
     </div><!-- /page-impact -->
 
 
@@ -1538,12 +1505,17 @@
     <div id="page-retailer" class="page">
 
         <!-- Top Bar -->
-        <header class="top-bar" style="justify-content:space-between;">
+        <header class="top-bar top-bar-with-nav" style="justify-content:space-between;">
             <div style="display:flex;align-items:center;gap:1rem;">
                 <!-- Hamburger removed -->
                 <img src="logo.png" alt="Sur+" class="top-bar-logo" style="cursor:pointer;"
                     onclick="navigate('onboarding')" />
             </div>
+            <nav class="top-bar-nav">
+                <a class="top-bar-nav-link active" onclick="navigate('retailer')" data-nav-page="retailer">Home</a>
+                <a class="top-bar-nav-link" onclick="showToast('Retailer impact insights coming soon.')">Impact</a>
+                <a class="top-bar-nav-link" onclick="showToast('Account coming soon.')">Account</a>
+            </nav>
             <div style="display:flex;align-items:center;gap:0.5rem;">
                 <div class="persona-toggle" onclick="togglePersona()" data-role="resident" title="Toggle persona">
                     <div class="toggle-bg"></div>
@@ -1799,22 +1771,6 @@
 
         </main>
 
-        <!-- Bottom Nav (mobile) -->
-        <nav class="bottom-nav">
-            <a data-nav-page="retailer" onclick="navigate('retailer')" class="active">
-                <span class="material-symbols-outlined icon-fill">dashboard</span>
-                <span class="label-sm">Dashboard</span>
-            </a>
-            <a onclick="showToast('Listings coming soon.')">
-                <span class="material-symbols-outlined">list_alt</span>
-                <span class="label-sm">Listings</span>
-            </a>
-            <a onclick="showToast('Account coming soon.')">
-                <span class="material-symbols-outlined">person</span>
-                <span class="label-sm">Account</span>
-            </a>
-        </nav>
-
     </div><!-- /page-retailer -->
 
 
@@ -1849,4 +1805,3 @@
 </body>
 
 </html>
-

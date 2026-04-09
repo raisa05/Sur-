@@ -797,6 +797,11 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
+.top-bar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 .top-bar-logo {
   height: 1.75rem;
   width: auto;
@@ -1168,8 +1173,51 @@ body {
   50%      { transform: scale(1.08); }
 }
 
+@media (max-width: 767px) {
+  .top-bar.top-bar-with-nav {
+    height: auto;
+    min-height: var(--nav-h);
+    flex-wrap: wrap;
+    row-gap: 0.75rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .top-bar.top-bar-with-nav .top-bar-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .top-bar.top-bar-with-nav .top-bar-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .top-bar.top-bar-with-nav .top-bar-nav a {
+    white-space: nowrap;
+  }
+
+  #page-browse .scrollable-page,
+  #page-impact .scrollable-page,
+  #page-retailer .scrollable-page {
+    padding-top: calc(112px + 1rem);
+  }
+}
+
 @media (min-width: 1024px) {
   .bottom-nav {
     display: none !important;
   }
+}
+
+.bottom-nav {
+  display: none !important;
+}
+
+#page-browse .scrollable-page,
+#page-impact .scrollable-page,
+#page-retailer .scrollable-page {
+  padding-bottom: 1.5rem !important;
 }

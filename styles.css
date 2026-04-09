@@ -260,6 +260,8 @@ body {
 .page {
   position: fixed;
   inset: 0;
+  display: flex;
+  flex-direction: column;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -286,13 +288,18 @@ body {
 
 #page-onboarding > main {
   flex: 1;
-  min-height: 0;
+  min-height: calc(100vh - var(--nav-h));
+}
+
+#page-onboarding > main > section {
+  min-height: 100%;
 }
 
 .page-content,
 .scrollable-page {
+  flex: 1;
   padding-top: calc(var(--nav-h) + 1rem);
-  min-height: 100%;
+  min-height: calc(100vh - var(--nav-h));
   max-width: 48rem;
   margin: 0 auto;
   padding-left: 1rem;

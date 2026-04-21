@@ -21,11 +21,28 @@
     <style>
         /* ── Page-specific overrides / extras ─────────────── */
 
-        /* Onboarding split layout */
-        #page-onboarding .split-left {
-            background: linear-gradient(135deg, #000000 0%, #0D1B2A 100%);
+        #page-onboarding>main {
             position: relative;
             overflow: hidden;
+            background:
+                radial-gradient(circle at top left, rgba(174, 238, 203, 0.2), transparent 24%),
+                linear-gradient(125deg, rgba(3, 10, 18, 0.94) 0%, rgba(13, 27, 42, 0.8) 46%, rgba(45, 106, 79, 0.58) 100%),
+                url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+        }
+
+        #page-onboarding>main::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(3, 10, 18, 0.1) 0%, rgba(3, 10, 18, 0.28) 100%);
+            pointer-events: none;
+        }
+
+        /* Onboarding split layout */
+        #page-onboarding .split-left {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
         }
 
         #page-onboarding .split-left .overlay-img {
@@ -34,14 +51,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.35;
+            opacity: 0.18;
+            filter: saturate(0.95);
         }
 
         #page-onboarding .split-left .overlay-gradient {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to right, #000000 0%, transparent 100%);
-            opacity: 0.8;
+            background: linear-gradient(110deg, rgba(0, 0, 0, 0.72) 0%, rgba(13, 27, 42, 0.3) 58%, rgba(13, 27, 42, 0.08) 100%);
         }
 
         #page-onboarding .stat-glass {
@@ -506,7 +523,7 @@
             <section class="split-left hide-sm"
                 style="width:50%;display:flex;flex-direction:column;justify-content:space-between;padding:4rem;">
                 <img class="overlay-img"
-                    src="C:\Users\raisa\.gemini\antigravity\brain\5f03cd8f-2df3-406f-9844-5c12487484d9\premium_surplus_food_1775492711195.png"
+                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80"
                     alt="" />
                 <div class="overlay-gradient"></div>
                 <div style="position:relative;z-index:2;">
@@ -545,7 +562,7 @@
                     <!-- Role cards -->
                     <div style="display:flex;flex-direction:column;gap:1rem;" id="role-selector">
 
-                        <!-- Resident -->
+                        <!-- Customer -->
                         <button class="role-card" data-role="resident" onclick="selectRole(this)">
                             <div class="icon-bg">
                                 <span class="material-symbols-outlined"
@@ -558,7 +575,7 @@
                             <div style="flex:1;min-width:0;">
                                 <div
                                     style="font-family:var(--font-headline);font-size:1.25rem;font-weight:800;color:var(--color-primary-container);">
-                                    Resident</div>
+                                    Customer</div>
                                 <div style="font-size:0.875rem;color:#4b5563;margin-top:0.125rem;">I want to find &amp;
                                     rescue premium surplus nearby.</div>
                             </div>
@@ -597,7 +614,7 @@
                         <p style="font-size:0.875rem;color:#4b5563;margin-bottom:1rem;">Already have an account?</p>
                         <button class="btn btn-primary"
                             style="border-radius:var(--radius-xl);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:0 3rem;height:48px;"
-                            onclick="navigate('browse')">
+                            onclick="signInAsCustomer()">
                             Sign In
                         </button>
                         <div style="margin-top:2rem;display:flex;justify-content:center;gap:0.5rem;">
@@ -733,7 +750,7 @@
                     <!-- Listing 1: Green Valley -->
                     <div class="listing-card" onclick="navigate('product')">
                         <div class="listing-img">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxXNp-Wm3vW1DF1iVyZtoVOFK048pjG6nviEVBNFx1DWYn2Bj6FeFjmDTmxSBrSs71byPI0gIZrb1lXhjNOWo_pcW2goi45cSMxKio08nydOvHOO-68tFQ-iHazljxva05kKW5VzsJOOU8BIa7BSNEL7AqIBO0Gun-aaTCXek33qVjYAYyqDoetO6ggvqNmBJKcJY3Yfkf7g-PZXkicqvr0_Ynm19OO00QmYzxmm3ZeupUGa2PsEI28_zKVaMG6zf_IDgpvOWpT3E"
+                            <img src="organic_box.png"
                                 alt="Green Valley" />
                         </div>
                         <div
@@ -758,7 +775,12 @@
                                         km</span>
                                     <span style="display:flex;align-items:center;gap:0.25rem;"><span
                                             class="material-symbols-outlined" style="font-size:1rem;">schedule</span>
-                                        Expires 24/10/26</span>
+                                        Best before: 24/10/26</span>
+                                </div>
+                                <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.375rem;margin-top:0.5rem;">
+                                    <span style="display:inline-flex;align-items:center;gap:0.25rem;background:#ecfdf5;color:#065f46;padding:0.2rem 0.625rem;border-radius:999px;font-size:0.6875rem;font-weight:700;"><span class="material-symbols-outlined" style="font-size:0.875rem;">local_fire_department</span>Prepared today</span>
+                                    <span style="display:inline-flex;align-items:center;gap:0.25rem;background:#eff6ff;color:#1e40af;padding:0.2rem 0.625rem;border-radius:999px;font-size:0.6875rem;font-weight:700;"><span class="material-symbols-outlined" style="font-size:0.875rem;">schedule</span>Pickup: 5–7 PM</span>
+                                    <span style="display:inline-flex;align-items:center;gap:0.25rem;background:#fef3c7;color:#92400e;padding:0.2rem 0.625rem;border-radius:999px;font-size:0.6875rem;font-weight:700;"><span class="material-symbols-outlined" style="font-size:0.875rem;">inventory_2</span>3 boxes left</span>
                                 </div>
                             </div>
                             <div
@@ -783,7 +805,7 @@
                     <!-- Listing 2: Blueberry Hills -->
                     <div class="listing-card" onclick="navigate('product')">
                         <div class="listing-img">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIbFZNyqfg6Cu6Bp5zP7a2op8udujdzC4yaHwlo3KXWJhSa2byoEbVxw2WPHrFDCLdadljBDjF88yjrmgb2Xq8Kqy5RGPq97vo-9xXd5sK66NlTY9NgHnBsP9a6QP0kL3Y8mXmwgXmPThaenMZgQ798cIbdkEQEzoY5JyflBlGwaqejrC9go9oSBct9-YJTxCn0s7ItVUVW5nJhwRPcDlPhWzCwAPHcQVi6zHMcfP9LZJSzYzBL-ZXGTno2OsGVGvrF1p1ymt-DZM"
+                            <img src="pastry_bag.png"
                                 alt="Blueberry Hills" />
                         </div>
                         <div
@@ -808,7 +830,12 @@
                                         km</span>
                                     <span style="display:flex;align-items:center;gap:0.25rem;"><span
                                             class="material-symbols-outlined" style="font-size:1rem;">schedule</span>
-                                        Expires 24/10/26</span>
+                                        Best before: 24/10/26</span>
+                                </div>
+                                <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.375rem;margin-top:0.5rem;">
+                                    <span style="display:inline-flex;align-items:center;gap:0.25rem;background:#ecfdf5;color:#065f46;padding:0.2rem 0.625rem;border-radius:999px;font-size:0.6875rem;font-weight:700;"><span class="material-symbols-outlined" style="font-size:0.875rem;">local_fire_department</span>Prepared today</span>
+                                    <span style="display:inline-flex;align-items:center;gap:0.25rem;background:#eff6ff;color:#1e40af;padding:0.2rem 0.625rem;border-radius:999px;font-size:0.6875rem;font-weight:700;"><span class="material-symbols-outlined" style="font-size:0.875rem;">schedule</span>Pickup: 6–8 PM</span>
+                                    <span style="display:inline-flex;align-items:center;gap:0.25rem;background:#fef3c7;color:#92400e;padding:0.2rem 0.625rem;border-radius:999px;font-size:0.6875rem;font-weight:700;"><span class="material-symbols-outlined" style="font-size:0.875rem;">inventory_2</span>8 bags left</span>
                                 </div>
                             </div>
                             <div
@@ -900,7 +927,7 @@
 
                     <!-- Hero image -->
                     <div class="product-hero">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIbFZNyqfg6Cu6Bp5zP7a2op8udujdzC4yaHwlo3KXWJhSa2byoEbVxw2WPHrFDCLdadljBDjF88yjrmgb2Xq8Kqy5RGPq97vo-9xXd5sK66NlTY9NgHnBsP9a6QP0kL3Y8mXmwgXmPThaenMZgQ798cIbdkEQEzoY5JyflBlGwaqejrC9go9oSBct9-YJTxCn0s7ItVUVW5nJhwRPcDlPhWzCwAPHcQVi6zHMcfP9LZJSzYzBL-ZXGTno2OsGVGvrF1p1ymt-DZM"
+                        <img src="pastry_bag.png"
                             alt="Mixed Pastry Bag" style="width:100%;height:100%;object-fit:cover;" />
                     </div>
 
@@ -918,38 +945,60 @@
                                 for a new home.
                             </p>
                         </div>
-                        <div style="display:flex;align-items:baseline;gap:1rem;">
-                            <span style="font-size:2.5rem;font-weight:900;color:var(--color-primary-container);">AED
-                                4.20</span>
-                            <span style="font-size:1.125rem;text-decoration:line-through;color:#9ca3af;">AED
-                                15.00</span>
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;padding-bottom:1.1rem;border-bottom:1px solid rgba(196,198,204,0.35);">
+                            <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;">
+                                <span style="font-size:2.5rem;font-weight:900;color:var(--color-primary-container);">AED
+                                    4.20</span>
+                                <span style="font-size:1.125rem;text-decoration:line-through;color:#9ca3af;">AED
+                                    15.00</span>
+                            </div>
+                            <span style="color:#92400e;font-size:0.78rem;font-weight:800;white-space:nowrap;padding-top:0.45rem;">8 bags left</span>
                         </div>
 
-                        <!-- Impact + expiry chips -->
-                        <div style="display:flex;flex-direction:column;gap:0.75rem;">
-                            <div
-                                style="background:var(--color-tertiary-fixed);padding:1rem 1.5rem;border-radius:var(--radius-xl);display:flex;align-items:center;gap:0.75rem;">
-                                <span class="material-symbols-outlined icon-fill"
-                                    style="color:var(--color-on-tertiary-fixed-variant);">eco</span>
-                                <span
-                                    style="font-size:1rem;font-weight:700;color:var(--color-on-tertiary-fixed);">Prevents
-                                    1.2 kg CO₂</span>
+                        <!-- Product info rows -->
+                        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+
+                            <!-- Inline highlights -->
+                            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.75rem 0.9rem;padding-bottom:1.1rem;border-bottom:1px solid rgba(196,198,204,0.35);">
+                                <span style="display:inline-flex;align-items:center;gap:0.55rem;padding:0.45rem 0.85rem;background:linear-gradient(135deg,rgba(236,253,245,0.95) 0%,rgba(220,252,231,0.92) 100%);color:#065f46;font-size:0.8rem;font-weight:800;border-radius:999px;border:1px solid rgba(6,95,70,0.08);box-shadow:0 6px 18px rgba(6,95,70,0.06);">
+                                    <span class="material-symbols-outlined icon-fill" style="font-size:0.95rem;">local_fire_department</span>
+                                    Prepared today
+                                </span>
+                                <span style="display:inline-flex;align-items:center;gap:0.55rem;padding:0.45rem 0.85rem;background:linear-gradient(135deg,rgba(233,250,241,0.96) 0%,rgba(209,240,223,0.9) 100%);color:#2D6A4F;font-size:0.8rem;font-weight:800;border-radius:999px;border:1px solid rgba(45,106,79,0.08);box-shadow:0 6px 18px rgba(45,106,79,0.06);">
+                                    <span class="material-symbols-outlined icon-fill" style="font-size:0.95rem;">eco</span>
+                                    Prevents 1.2 kg CO&#x2082;
+                                </span>
                             </div>
-                            <div
-                                style="background:var(--color-primary-container);padding:1rem 1.5rem;border-radius:var(--radius-xl);display:flex;align-items:center;justify-content:space-between;">
-                                <div style="display:flex;align-items:center;gap:0.5rem;">
-                                    <span class="material-symbols-outlined"
-                                        style="color:var(--color-primary-fixed-dim);">timer</span>
-                                    <span class="label-sm" style="color:rgba(255,255,255,0.7);">EXPIRES ON</span>
+
+                            <!-- Meta rows -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;padding-bottom:0.2rem;">
+                                <div style="display:flex;flex-direction:column;gap:0.35rem;">
+                                    <div style="display:flex;align-items:center;gap:0.45rem;">
+                                        <span class="material-symbols-outlined" style="color:var(--color-on-surface-variant);font-size:1rem;">restaurant</span>
+                                        <span style="font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-on-surface-variant);">Best before</span>
+                                    </div>
+                                    <div style="font-family:var(--font-headline);font-size:1.18rem;font-weight:800;color:var(--color-primary-container);letter-spacing:-0.01em;">24/10/26</div>
                                 </div>
-                                <span
-                                    style="font-family:var(--font-headline);font-size:1.25rem;font-weight:800;color:white;letter-spacing:0.05em;">24/10/26</span>
+                                <div style="display:flex;flex-direction:column;gap:0.35rem;">
+                                    <div style="display:flex;align-items:center;gap:0.45rem;">
+                                        <span class="material-symbols-outlined icon-fill" style="color:#1d4ed8;font-size:1rem;">schedule</span>
+                                        <span style="font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-on-surface-variant);">Pickup time</span>
+                                    </div>
+                                    <div style="font-family:var(--font-headline);font-size:1.18rem;font-weight:800;color:var(--color-primary-container);letter-spacing:-0.01em;">6&#x2013;8 PM</div>
+                                </div>
+                                <div style="display:flex;flex-direction:column;gap:0.35rem;">
+                                    <div style="display:flex;align-items:center;gap:0.45rem;">
+                                        <span class="material-symbols-outlined" style="color:var(--color-on-surface-variant);font-size:1rem;">timer</span>
+                                        <span style="font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-on-surface-variant);">Listing expires</span>
+                                    </div>
+                                    <div style="font-family:var(--font-headline);font-size:1.18rem;font-weight:800;color:var(--color-primary-container);letter-spacing:-0.01em;">8:00 PM Today</div>
+                                </div>
                             </div>
+
                         </div>
 
                         <!-- Details & allergens -->
-                        <div
-                            style="background:var(--color-surface-container-low);padding:2rem;border-radius:var(--radius-3xl);">
+                        <div style="padding-top:0.25rem;">
                             <div style="margin-bottom:1.5rem;">
                                 <h2 class="label-md" style="color:var(--color-primary-container);margin-bottom:1rem;">
                                     Potential Items</h2>
@@ -980,7 +1029,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div style="padding-top:1.25rem;border-top:1px solid rgba(196,198,204,0.2);">
+                            <div style="padding-top:1.25rem;border-top:1px solid rgba(196,198,204,0.28);">
                                 <h2 class="label-md"
                                     style="color:var(--color-primary-container);margin-bottom:0.75rem;">Allergens</h2>
                                 <div class="allergen-badge">
@@ -1048,6 +1097,11 @@
         <!-- Sticky Reserve button -->
         <div class="checkout-footer">
             <div style="max-width:960px;margin:0 auto;">
+                <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;margin-bottom:0.5rem;">
+                    <span class="material-symbols-outlined" style="font-size:1rem;color:#1e40af;">schedule</span>
+                    <span style="font-size:0.8125rem;font-weight:600;color:#1e40af;">Pickup between 6–8 PM today</span>
+                    <span style="font-size:0.75rem;color:#92400e;font-weight:700;background:#fef3c7;padding:0.125rem 0.5rem;border-radius:999px;">8 left</span>
+                </div>
                 <button class="btn btn-secondary-green"
                     style="width:100%;height:56px;border-radius:var(--radius-xl);font-size:1rem;" onclick="reserve()">
                     Reserve — AED 4.20
@@ -1095,7 +1149,7 @@
                         <!-- Image -->
                         <div style="position:relative;width:72px;height:72px;flex-shrink:0;">
                             <div style="width:100%;height:100%;border-radius:var(--radius-lg);overflow:hidden;">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIbFZNyqfg6Cu6Bp5zP7a2op8udujdzC4yaHwlo3KXWJhSa2byoEbVxw2WPHrFDCLdadljBDjF88yjrmgb2Xq8Kqy5RGPq97vo-9xXd5sK66NlTY9NgHnBsP9a6QP0kL3Y8mXmwgXmPThaenMZgQ798cIbdkEQEzoY5JyflBlGwaqejrC9go9oSBct9-YJTxCn0s7ItVUVW5nJhwRPcDlPhWzCwAPHcQVi6zHMcfP9LZJSzYzBL-ZXGTno2OsGVGvrF1p1ymt-DZM"
+                                <img src="pastry_bag.png"
                                     alt="Pastry" style="width:100%;height:100%;object-fit:cover;" />
                             </div>
                             <div
@@ -1159,6 +1213,14 @@
                                 <div
                                     style="font-size:0.875rem;color:var(--color-on-surface-variant);line-height:1.4;margin-top:0.125rem;">
                                     Sheikh Zayed Road, Safa Park Exit, Dubai</div>
+                            </div>
+                        </div>
+                        <!-- Pickup time -->
+                        <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;padding:0.75rem 1rem;background:#eff6ff;border-radius:var(--radius-lg);border:1px solid rgba(30,64,175,0.12);">
+                            <span class="material-symbols-outlined icon-fill" style="color:#1e40af;font-size:1.25rem;">schedule</span>
+                            <div>
+                                <div style="font-weight:700;font-size:0.875rem;color:#1e40af;">Pickup between 6–8 PM today</div>
+                                <div style="font-size:0.75rem;color:#3b82f6;">Collect your order during this window</div>
                             </div>
                         </div>
                     </div>
@@ -1281,8 +1343,9 @@
         <main class="scrollable-page" style="--page-max:800px;--page-pad:1.5rem;">
 
             <!-- Collectible card -->
+            <!-- Collectible card -->
             <section style="display:flex;flex-direction:column;align-items:center;margin-top:1rem;">
-                <div class="collectible-card" style="width:100%;max-width:280px;height:340px;">
+                <div class="collectible-card" style="width:100%;max-width:280px;height:360px;">
                     <div style="position:absolute;inset:0;" class="rare-gradient"></div>
                     <div
                         style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent,rgba(255,255,255,0.1));">
@@ -1290,10 +1353,13 @@
                     <div class="shimmer"></div>
                     <div
                         style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1.5rem;z-index:2;color:white;">
-                        <!-- Tier badge -->
-                        <div
-                            style="background:#8b5cf6;border:1px solid rgba(255,255,255,0.4);padding:0.25rem 1.5rem;border-radius:999px;">
-                            <span style="font-size:0.75rem;font-weight:900;letter-spacing:0.2em;">RARE</span>
+                        <!-- Level badge -->
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+                            <div
+                                style="background:#8b5cf6;border:1px solid rgba(255,255,255,0.4);padding:0.25rem 1.5rem;border-radius:999px;">
+                                <span style="font-size:0.75rem;font-weight:900;letter-spacing:0.2em;">LEVEL 3</span>
+                            </div>
+                            <span style="font-size:0.625rem;color:rgba(219,234,254,0.6);font-weight:600;letter-spacing:0.1em;">RARE RESCUER</span>
                         </div>
                         <!-- Icon + stat -->
                         <div
@@ -1307,57 +1373,77 @@
                             </div>
                             <div style="text-align:center;">
                                 <h2
-                                    style="font-family:var(--font-headline);font-size:1.875rem;font-weight:900;letter-spacing:-0.02em;line-height:1;margin-bottom:0.25rem;">
-                                    <span data-count="42.5" data-decimals="1">42.5</span> kg saved
+                                    style="font-family:var(--font-headline);font-size:1.875rem;font-weight:900;letter-spacing:-0.02em;line-height:1;margin-bottom:0.375rem;">
+                                    <span data-count="42.5" data-decimals="1">42.5</span> kg
                                 </h2>
-                                <p
-                                    style="font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(219,234,254,0.8);">
-                                    Rare</p>
+                                <p style="font-size:0.8125rem;font-weight:600;color:rgba(219,234,254,0.9);margin-bottom:0.125rem;">of food saved from waste</p>
+                                <p style="font-size:0.6875rem;color:rgba(219,234,254,0.55);">&#x2248; 84 meals rescued</p>
                             </div>
                         </div>
-                        <!-- Quote -->
+                        <!-- Unlocked label -->
                         <div
-                            style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem;width:100%;margin-bottom:0.5rem;">
-                            <p
-                                style="text-align:center;font-size:0.625rem;font-style:italic;color:rgba(255,255,255,0.7);line-height:1.5;">
-                                "Diverted enough food to feed 42 families for a day."
+                            style="border-top:1px solid rgba(255,255,255,0.1);padding-top:0.875rem;width:100%;text-align:center;">
+                            <p style="font-size:0.6875rem;font-weight:700;color:rgba(219,234,254,0.7);letter-spacing:0.05em;">
+                                <span class="material-symbols-outlined icon-fill" style="font-size:0.75rem;vertical-align:-1px;margin-right:0.25rem;">lock_open</span>
+                                You unlocked this level at 25 kg
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sticker album -->
-                <div style="margin-top:2rem;width:100%;max-width:320px;">
-                    <div
-                        style="display:flex;justify-content:space-between;gap:0.25rem;align-items:flex-end;margin-bottom:0.75rem;">
-                        <div class="sticker earned" style="background:linear-gradient(135deg,#9ca3af,#475569);">
-                            <span class="material-symbols-outlined icon-fill"
-                                style="color:white;font-size:0.875rem;">eco</span>
+                <!-- Level progress track -->
+                <div style="margin-top:2rem;width:100%;max-width:360px;">
+                    <!-- Level labels -->
+                    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:0.25rem;margin-bottom:0.5rem;">
+                        <!-- Lv1 Starter -->
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;flex:1;">
+                            <div class="sticker earned" style="background:linear-gradient(135deg,#9ca3af,#475569);">
+                                <span class="material-symbols-outlined icon-fill" style="color:white;font-size:0.875rem;">eco</span>
+                            </div>
+                            <span style="font-size:0.5rem;font-weight:700;color:var(--color-on-surface-variant);text-transform:uppercase;letter-spacing:0.05em;">Starter</span>
                         </div>
-                        <div class="sticker earned" style="background:linear-gradient(135deg,#34d399,#0d9488);">
-                            <span class="material-symbols-outlined icon-fill"
-                                style="color:white;font-size:0.875rem;">park</span>
+                        <!-- Lv2 Hero -->
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;flex:1;">
+                            <div class="sticker earned" style="background:linear-gradient(135deg,#34d399,#0d9488);">
+                                <span class="material-symbols-outlined icon-fill" style="color:white;font-size:0.875rem;">park</span>
+                            </div>
+                            <span style="font-size:0.5rem;font-weight:700;color:var(--color-on-surface-variant);text-transform:uppercase;letter-spacing:0.05em;">Hero</span>
                         </div>
-                        <div class="sticker active rare-gradient">
-                            <span class="material-symbols-outlined icon-fill"
-                                style="color:white;font-size:1rem;">shield</span>
+                        <!-- Lv3 Rare (current) -->
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;flex:1;">
+                            <div class="sticker active rare-gradient">
+                                <span class="material-symbols-outlined icon-fill" style="color:white;font-size:1rem;">shield</span>
+                            </div>
+                            <span style="font-size:0.5rem;font-weight:800;color:#8b5cf6;text-transform:uppercase;letter-spacing:0.05em;">Rare</span>
                         </div>
-                        <div class="sticker locked">
-                            <span class="material-symbols-outlined"
-                                style="color:rgba(139,92,246,0.4);font-size:0.875rem;">lock</span>
+                        <!-- Lv4 Epic (locked) -->
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;flex:1;">
+                            <div class="sticker locked">
+                                <span class="material-symbols-outlined" style="color:rgba(139,92,246,0.4);font-size:0.875rem;">lock</span>
+                            </div>
+                            <span style="font-size:0.5rem;font-weight:700;color:var(--color-on-surface-variant);text-transform:uppercase;letter-spacing:0.05em;opacity:0.5;">Epic</span>
                         </div>
-                        <div class="sticker locked" style="border-color:rgba(245,158,11,0.3);">
-                            <span class="material-symbols-outlined"
-                                style="color:rgba(245,158,11,0.4);font-size:0.875rem;">lock</span>
+                        <!-- Lv5 Legend (locked) -->
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;flex:1;">
+                            <div class="sticker locked" style="border-color:rgba(245,158,11,0.3);">
+                                <span class="material-symbols-outlined" style="color:rgba(245,158,11,0.4);font-size:0.875rem;">lock</span>
+                            </div>
+                            <span style="font-size:0.5rem;font-weight:700;color:var(--color-on-surface-variant);text-transform:uppercase;letter-spacing:0.05em;opacity:0.5;">Legend</span>
                         </div>
-                        <div class="sticker locked" style="border-color:rgba(234,179,8,0.3);">
-                            <span class="material-symbols-outlined"
-                                style="color:rgba(234,179,8,0.3);font-size:0.875rem;">lock</span>
+                        <!-- Lv6 Mythic (locked) -->
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;flex:1;">
+                            <div class="sticker locked" style="border-color:rgba(234,179,8,0.3);">
+                                <span class="material-symbols-outlined" style="color:rgba(234,179,8,0.3);font-size:0.875rem;">lock</span>
+                            </div>
+                            <span style="font-size:0.5rem;font-weight:700;color:var(--color-on-surface-variant);text-transform:uppercase;letter-spacing:0.05em;opacity:0.5;">Mythic</span>
                         </div>
                     </div>
-                    <p
-                        style="text-align:center;font-size:0.6875rem;font-weight:700;color:var(--color-on-surface-variant);font-style:italic;">
-                        7.5 kg until Epic. Keep going!</p>
+                    <!-- Progress bar -->
+                    <div style="width:100%;height:4px;background:var(--color-surface-container-high);border-radius:999px;overflow:hidden;margin-bottom:0.5rem;">
+                        <div style="height:100%;width:50%;background:linear-gradient(90deg,#9ca3af,#34d399,#8b5cf6);border-radius:999px;"></div>
+                    </div>
+                    <p style="text-align:center;font-size:0.6875rem;font-weight:700;color:var(--color-on-surface-variant);">
+                        Save 7.5 kg more to reach <span style="color:#8b5cf6;">Epic</span></p>
                 </div>
             </section>
 
@@ -1640,7 +1726,7 @@
                         <div class="card"
                             style="padding:1.5rem;display:flex;align-items:center;gap:1.5rem;border-radius:var(--radius-3xl);">
                             <div class="retailer-listing-img">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmHzCSso5y_kNTDOaLfgUwTGfOuEx-Jg3vN28hmD3wCyy9pLlPxZdId7FbiVvmRmwjNeC88DyvEmNycRxdfB2XHcoC55uCZPWtAa8oXkGK605YmlDU8ee4v1ZCrdzpmcPH_yg3R5h7n77r7EGfd2F8LbAd8a6taCnFMfjYP4kDVZuhj5M-7-wXNVlDyAu-9Qexg7v6PtBRCpL1KTbs5w_2B5_UXWNFbr5fTy_RXCvGrc-pYymQlHL3Bi8ESbPMf7Vp1EQdEVPza_U"
+                                <img src="pastry_bag.png"
                                     alt="Pastries" />
                             </div>
                             <div style="flex:1;min-width:0;">
@@ -1676,7 +1762,7 @@
                         <div class="card"
                             style="padding:1.5rem;display:flex;align-items:center;gap:1.5rem;border-radius:var(--radius-3xl);">
                             <div class="retailer-listing-img">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvqJp28X5gDdr8UpMK18FAGxK8iQc-iOUwFV0ijrxAaBu3SD1do9xWAlWO9Ov5oqA51nt9y5gP5BgAZcmT2j4RYZvcGRpJrl8xVzOMaOiOEujaz2s2L-TZmuoTF5pCaXQ9ibRHoGpYJQsacsqI4ORzrRdvBwHssdaZ1QGioQoHtqIOsLRm8wcc7WCvGWRPzoAYK3Sk0FyFelSTquYKE6dXdh2p-rJzVl8JgIAtgiyvF3y-fW4JVcOVD_IFF9VkFnWo1z4DRdNVx08"
+                                <img src="organic_box.png"
                                     alt="Organic Box" />
                             </div>
                             <div style="flex:1;min-width:0;">

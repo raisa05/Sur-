@@ -5,12 +5,12 @@
 
 /* ── Router ─────────────────────────────────────────── */
 const PAGES = {
-  onboarding:     'page-onboarding',
-  browse:         'page-browse',
-  product:        'page-product',
-  checkout:       'page-checkout',
-  impact:         'page-impact',
-  retailer:       'page-retailer',
+  onboarding: 'page-onboarding',
+  browse: 'page-browse',
+  product: 'page-product',
+  checkout: 'page-checkout',
+  impact: 'page-impact',
+  retailer: 'page-retailer',
 };
 
 let currentPage = 'onboarding';
@@ -85,7 +85,7 @@ function handleRoleConfirm() {
     });
     return;
   }
-  
+
   // Sync all persona toggles globally
   document.querySelectorAll('.persona-toggle').forEach(el => {
     el.setAttribute('data-role', selectedRole);
@@ -96,15 +96,26 @@ function handleRoleConfirm() {
   } else {
     navigate('browse');
   }
+
+  setTimeout(() => {
+    showToast('Logged in as Khalil_Laghari', 2200);
+  }, 150);
+}
+
+function signInAsCustomer() {
+  navigate('browse');
+  setTimeout(() => {
+    showToast('logged in as "Khalil_Ligari"', 2200);
+  }, 150);
 }
 
 function togglePersona() {
   selectedRole = selectedRole === 'retailer' ? 'resident' : 'retailer';
-  
+
   document.querySelectorAll('.persona-toggle').forEach(el => {
     el.setAttribute('data-role', selectedRole);
   });
-  
+
   if (selectedRole === 'retailer') {
     navigate('retailer');
   } else {
@@ -222,7 +233,7 @@ function reserve() {
 }
 
 function confirmPurchase() {
-  showToast('🎉 Order confirmed! Pick up by 7:30 PM.');
+  showToast('🎉 Order confirmed!');
   setTimeout(() => navigate('impact'), 1800);
 }
 

@@ -704,12 +704,12 @@
                         <div class="cat-overlay"></div>
                         <div class="cat-label">Prepared Meals</div>
                     </div>
-                    <!-- Produce -->
-                    <div class="category-card" onclick="showToast('Browsing Produce…')">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE8VfixM69duL0dYfr1bLik6M45Z3mCa5WAlgxES9JLrsdDZIvBPu5VeFUMgmG-NKgd14R0eRlggVngedcLM4N7xXlmLSf0rPfJXaIDXNJ2SQRvgrFP0MNbkniPUUssE0BtZLzw_UJdhX1PU7XEX-oOpTCgwpLGXZMNdF0iR2aG278Ca-K5qbj4ORlh1Zjjj3_RLqQrWMPe1jhWDlzDqPqZ7tI2wfOUXuMPdfl_FMMR4Xhb96-LOMyLVv-UXkoyrrXClVQ7xI4zw0"
-                            alt="Produce" />
+                    <!-- Desserts -->
+                    <div class="category-card" onclick="showToast('Browsing Desserts…')">
+                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80"
+                            alt="Desserts" />
                         <div class="cat-overlay"></div>
-                        <div class="cat-label">Produce</div>
+                        <div class="cat-label">Desserts</div>
                     </div>
                 </div>
             </section>
@@ -1680,13 +1680,13 @@
                     <div style="position:relative;z-index:2;">
                         <div
                             style="display:inline-block;background:rgba(0,0,0,0.35);padding:0.25rem 0.75rem;border-radius:999px;font-size:0.625rem;font-weight:700;margin-bottom:0.625rem;letter-spacing:0.05em;">
-                            Sustainability milestone</div>
+                            Monthly sustainability milestone</div>
                         <h2
                             style="font-family:var(--font-headline);font-size:clamp(1.125rem,3vw,1.5rem);font-weight:900;line-height:1.2;">
                             1,240 kg CO₂ prevented</h2>
                         <p
                             style="color:rgba(255,255,255,0.7);font-size:0.6875rem;margin-top:0.5rem;line-height:1.4;font-weight:500;">
-                            Diverted 3.2 tons of food waste this quarter.</p>
+                            Diverted 1.24 tons of food waste this month.</p>
                     </div>
                     <div style="position:absolute;right:-1rem;bottom:-1rem;opacity:0.08;pointer-events:none;">
                         <span class="material-symbols-outlined" style="font-size:7rem;">eco</span>
@@ -1696,8 +1696,10 @@
                 <!-- Efficiency donut -->
                 <div
                     style="background:var(--color-tertiary-fixed);border-radius:1.5rem;padding:1.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:176px;">
-                    <div class="label-sm" style="color:var(--color-on-tertiary-fixed-variant);margin-bottom:0.5rem;">
-                        Surplus efficiency</div>
+                    <div class="label-sm"
+                        style="color:var(--color-on-tertiary-fixed-variant);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.25rem;">
+                        <span>Average Surplus Sold Monthly</span>
+                    </div>
                     <div style="position:relative;width:80px;height:80px;margin-bottom:0.5rem;"
                         class="circular-progress">
                         <svg width="80" height="80">
@@ -1712,9 +1714,7 @@
                             style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-headline);font-size:1.25rem;font-weight:900;color:var(--color-on-tertiary-fixed-variant);">
                             84%</div>
                     </div>
-                    <div style="font-size:0.75rem;font-weight:700;color:var(--color-on-tertiary-fixed-variant);">Surplus
-                        Rate 84%</div>
-                    <div style="font-size:0.625rem;font-weight:700;color:#2D6A4F;margin-top:0.25rem;">+12% vs last month
+                    <div style="font-size:0.75rem;font-weight:700;color:#2D6A4F;">+12% vs last month
                     </div>
                 </div>
             </div>
@@ -1819,8 +1819,12 @@
                             style="font-family:var(--font-headline);font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;">
                             <span class="material-symbols-outlined"
                                 style="color:var(--color-secondary);">bar_chart</span>
-                            7-Day Waste Reduction
+                            Surplus Saved
                         </h3>
+                        <p
+                            style="font-size:0.75rem;color:var(--color-on-surface-variant);margin:-0.75rem 0 1.25rem 0;line-height:1.5;">
+                            Percentage of surplus inventory sold.
+                        </p>
                         <div class="bar-chart" id="retailer-bar-chart">
                             <div class="bar-chart-bar" data-bar-h="40%" style="position:relative; height:0;"><span style="position:absolute; width:100%; top:-1.5rem; text-align:center; font-size:0.75rem; font-weight:700; color:var(--color-on-surface-variant);">40%</span></div>
                             <div class="bar-chart-bar" data-bar-h="60%" style="position:relative; height:0;"><span style="position:absolute; width:100%; top:-1.5rem; text-align:center; font-size:0.75rem; font-weight:700; color:var(--color-on-surface-variant);">60%</span></div>
@@ -1857,11 +1861,6 @@
                             "Your bakery items sell 40% faster on Tuesdays. We suggest increasing your <strong>flash
                                 sale duration</strong> by 45 minutes to capture late-commuter traffic."
                         </p>
-                        <button class="btn btn-surface"
-                            style="width:100%;border-radius:var(--radius-xl);height:48px;font-size:0.875rem;color:var(--color-primary-container);"
-                            onclick="showToast('Strategy applied! 🚀')">
-                            Apply Suggested Strategy
-                        </button>
                     </div>
 
                 </div>

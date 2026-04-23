@@ -334,20 +334,21 @@
                 radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 30%),
                 linear-gradient(140deg, #0f2740 0%, #15466e 52%, #1f7a8c 100%);
             color: white;
-            padding: 1.5rem;
-            border-radius: var(--radius-2xl);
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            box-shadow: 0 18px 36px rgba(13, 27, 42, 0.22);
+            padding: 1rem 1.1rem;
+            border-radius: 1.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 0.9rem;
+            box-shadow: 0 14px 28px rgba(13, 27, 42, 0.16);
         }
 
         .community-impact-card::before {
             content: "";
             position: absolute;
-            inset: auto -10% -30% auto;
-            width: 180px;
-            height: 180px;
+            inset: auto -12% -60% auto;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(177, 240, 206, 0.2) 0%, transparent 70%);
             pointer-events: none;
@@ -355,126 +356,91 @@
 
         .community-impact-top {
             display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1rem;
+            align-items: center;
+            gap: 0.9rem;
             position: relative;
             z-index: 1;
         }
 
-        .community-impact-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            width: fit-content;
-            padding: 0.4rem 0.75rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.14);
-            color: #d8fff0;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
         .community-impact-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 1.25rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.16);
             border: 1px solid rgba(255, 255, 255, 0.16);
-            font-size: 1.8rem;
+            font-size: 1.45rem;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
         }
 
-        .community-impact-title {
-            font-family: var(--font-headline);
-            font-size: 1.35rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-top: 0.625rem;
-            max-width: 14ch;
-        }
-
-        .community-impact-copy {
-            color: rgba(255, 255, 255, 0.78);
-            font-size: 0.8125rem;
-            margin-top: 0.625rem;
-            line-height: 1.6;
-            max-width: 28ch;
-        }
-
-        .community-impact-copy strong {
-            color: white;
-        }
-
-        .community-impact-metric {
+        .community-impact-content {
             position: relative;
             z-index: 1;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 0.75rem;
-            align-items: end;
-            padding: 1rem;
-            border-radius: 1.25rem;
-            background: rgba(7, 17, 30, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 0;
         }
 
-        .community-impact-metric-label {
-            display: block;
-            color: rgba(255, 255, 255, 0.64);
-            font-size: 0.72rem;
+        .community-impact-heading {
+            color: #b1f0ce;
+            font-size: 0.68rem;
             font-weight: 700;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             margin-bottom: 0.35rem;
         }
 
-        .community-impact-metric-value {
+        .community-impact-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.88);
+            max-width: 54ch;
+            margin: 0;
+        }
+
+        .community-impact-title strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        .community-impact-stat {
+            position: relative;
+            z-index: 1;
+            min-width: 96px;
+            padding: 0.55rem 0.75rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .community-impact-stat-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .community-impact-stat-value {
             font-family: var(--font-headline);
-            font-size: 1.7rem;
-            font-weight: 800;
+            font-size: 0.98rem;
+            font-weight: 700;
             line-height: 1;
         }
 
-        .community-impact-badge {
-            align-self: start;
-            padding: 0.45rem 0.75rem;
-            border-radius: 999px;
-            background: rgba(177, 240, 206, 0.18);
-            color: #d8fff0;
-            font-size: 0.75rem;
-            font-weight: 800;
-            white-space: nowrap;
-        }
+        @media (max-width: 640px) {
+            .community-impact-card {
+                grid-template-columns: auto 1fr;
+            }
 
-        .community-impact-footer {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: rgba(255, 255, 255, 0.82);
-            font-size: 0.8rem;
-            line-height: 1.5;
-        }
-
-        .community-impact-footer-bubble {
-            width: 2rem;
-            height: 2rem;
-            flex-shrink: 0;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.14);
-            font-size: 1rem;
+            .community-impact-stat {
+                grid-column: 1 / -1;
+                justify-self: start;
+            }
         }
 
         /* "Looking for something" CTA */
@@ -1758,23 +1724,15 @@
                 <!-- Community card -->
                 <div class="community-impact-card">
                     <div class="community-impact-top">
-                        <div>
-                            <span class="community-impact-pill">Your circle impact</span>
-                            <h3 class="community-impact-title">Your crew has almost rescued a whole blue whale's worth.</h3>
-                            <p class="community-impact-copy">You and your friends have already saved <strong>190,000 kg</strong> of food this year. That is huge, splashy, and very whale-worthy.</p>
-                        </div>
                         <div class="community-impact-avatar" aria-hidden="true">🐋</div>
-                    </div>
-                    <div class="community-impact-metric">
-                        <div>
-                            <span class="community-impact-metric-label">Food rescued together</span>
-                            <div class="community-impact-metric-value">190k kg</div>
+                        <div class="community-impact-content">
+                            <div class="community-impact-heading">Fun Fact</div>
+                            <p class="community-impact-title">You and your friend have saved <strong>190,000 kg of food</strong>. That's about the weight of a blue whale!</p>
                         </div>
-                        <div class="community-impact-badge">Blue whale energy</div>
                     </div>
-                    <div class="community-impact-footer">
-                        <span class="community-impact-footer-bubble" aria-hidden="true">🌊</span>
-                        <p>That is the kind of number that makes your circle feel less like a group chat and more like a whole rescue pod.</p>
+                    <div class="community-impact-stat">
+                        <span class="community-impact-stat-label">Saved so far</span>
+                        <div class="community-impact-stat-value">190k kg</div>
                     </div>
                 </div>
 

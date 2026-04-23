@@ -354,15 +354,9 @@
             pointer-events: none;
         }
 
-        .community-impact-top {
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
+        .community-impact-avatar {
             position: relative;
             z-index: 1;
-        }
-
-        .community-impact-avatar {
             width: 3rem;
             height: 3rem;
             border-radius: 1rem;
@@ -432,14 +426,60 @@
             line-height: 1;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 767px) {
             .community-impact-card {
                 grid-template-columns: auto 1fr;
+                align-items: flex-start;
+                gap: 0.75rem;
+                padding: 1rem;
+            }
+
+            .community-impact-avatar {
+                width: 2.35rem;
+                height: 2.35rem;
+                border-radius: 0.8rem;
+                font-size: 1.1rem;
+                flex-shrink: 0;
+                grid-row: 1 / span 2;
+            }
+
+            .community-impact-content {
+                width: 100%;
+                grid-column: 2;
+            }
+
+            .community-impact-heading {
+                font-size: 0.6rem;
+                margin-bottom: 0.28rem;
+            }
+
+            .community-impact-title {
+                font-size: 0.82rem;
+                line-height: 1.4;
+                max-width: none;
             }
 
             .community-impact-stat {
-                grid-column: 1 / -1;
+                grid-column: 2;
                 justify-self: start;
+                min-width: 0;
+                padding: 0.38rem 0.55rem;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.1);
+                margin-top: 0.1rem;
+            }
+
+            .community-impact-stat-label {
+                font-size: 0.46rem;
+                margin-bottom: 0.12rem;
+            }
+
+            .community-impact-stat-value {
+                font-size: 0.8rem;
+            }
+
+            .community-impact-stat {
+                display: none;
             }
         }
 
@@ -1772,12 +1812,10 @@
 
                 <!-- Community card -->
                 <div class="community-impact-card">
-                    <div class="community-impact-top">
-                        <div class="community-impact-avatar" aria-hidden="true">🐋</div>
-                        <div class="community-impact-content">
-                            <div class="community-impact-heading">Fun Fact</div>
-                            <p class="community-impact-title">You and your friend have saved <strong>190,000 kg of food</strong>. That's about the weight of a blue whale!</p>
-                        </div>
+                    <div class="community-impact-avatar" aria-hidden="true">🐋</div>
+                    <div class="community-impact-content">
+                        <div class="community-impact-heading">Fun Fact</div>
+                        <p class="community-impact-title">You and your friend have saved <strong>190,000 kg of food</strong>. That's about the weight of a blue whale!</p>
                     </div>
                     <div class="community-impact-stat">
                         <span class="community-impact-stat-label">Saved so far</span>

@@ -477,6 +477,59 @@
             flex-direction: column;
         }
 
+        .onboarding-footer {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .onboarding-footer-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .onboarding-footer-link {
+            color: #6b7280;
+            font-size: 0.625rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 767px) {
+            #page-onboarding>main {
+                background: linear-gradient(180deg, #f7f9fc 0%, #f1f4f8 100%);
+            }
+
+            #page-onboarding>main::before {
+                display: none;
+            }
+
+            #page-onboarding>main>section:last-child {
+                background: transparent !important;
+                padding: 2rem 1.25rem 2.5rem !important;
+            }
+
+            .onboarding-footer {
+                margin-top: 3.25rem;
+            }
+
+            .onboarding-footer-links {
+                margin-top: 2.5rem;
+                gap: 0.25rem;
+            }
+
+            .onboarding-footer-link {
+                padding: 0.6rem 0.7rem;
+                font-size: 0.58rem;
+                letter-spacing: 0.1em;
+            }
+        }
+
         /* Scrollable pages */
         .scrollable-page {
             height: 100dvh;
@@ -690,10 +743,6 @@
 
                         <!-- Customer -->
                         <button class="role-card" data-role="resident" onclick="selectRole(this)">
-                            <div class="icon-bg">
-                                <span class="material-symbols-outlined"
-                                    style="font-size:6rem;color:var(--color-primary-container);">shopping_basket</span>
-                            </div>
                             <div class="role-icon-resident">
                                 <span class="material-symbols-outlined icon-fill"
                                     style="font-size:1.75rem;">person</span>
@@ -711,10 +760,6 @@
 
                         <!-- Retailer -->
                         <button class="role-card" data-role="retailer" onclick="selectRole(this)">
-                            <div class="icon-bg">
-                                <span class="material-symbols-outlined"
-                                    style="font-size:6rem;color:var(--color-primary-container);">storefront</span>
-                            </div>
                             <div class="role-icon-retailer">
                                 <span class="material-symbols-outlined icon-fill"
                                     style="font-size:1.75rem;">storefront</span>
@@ -736,20 +781,24 @@
                     </div>
 
                     <!-- Footer -->
-                    <div style="margin-top:2.5rem;text-align:center;">
+                    <div class="onboarding-footer">
                         <p style="font-size:0.875rem;color:#4b5563;margin-bottom:1rem;">Already have an account?</p>
                         <button class="btn btn-primary"
                             style="border-radius:var(--radius-xl);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:0 3rem;height:48px;"
                             onclick="signInAsCustomer()">
                             Sign In
                         </button>
-                        <div style="margin-top:2rem;display:flex;justify-content:center;gap:0.5rem;">
+                        <div class="onboarding-footer-links">
                             <a href="#"
-                                style="color:#6b7280;font-size:0.625rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;padding:0.75rem 1rem;text-decoration:none;"
+                                class="onboarding-footer-link"
+                                onmouseover="this.style.color='#000'" onmouseout="this.style.color='#6b7280'">Who
+                                Are We</a>
+                            <a href="#"
+                                class="onboarding-footer-link"
                                 onmouseover="this.style.color='#000'" onmouseout="this.style.color='#6b7280'">Privacy
                                 Policy</a>
                             <a href="#"
-                                style="color:#6b7280;font-size:0.625rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;padding:0.75rem 1rem;text-decoration:none;"
+                                class="onboarding-footer-link"
                                 onmouseover="this.style.color='#000'" onmouseout="this.style.color='#6b7280'">Terms of
                                 Service</a>
                         </div>

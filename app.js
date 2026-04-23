@@ -16,6 +16,7 @@ const PAGES = {
 let currentPage = 'onboarding';
 let selectedRole = null;
 let cartQuantity = 1;
+const AVAILABLE_STOCK = 8;
 
 function navigate(pageKey, options = {}) {
   // Hide all pages
@@ -125,20 +126,36 @@ function togglePersona() {
 
 /* ── Cart / Quantity ─────────────────────────────────── */
 function changeQty(delta) {
-  cartQuantity = Math.max(1, Math.min(10, cartQuantity + delta));
+  const nextQty = Math.max(1, Math.min(AVAILABLE_STOCK, cartQuantity + delta));
+
+  if (delta > 0 && nextQty === cartQuantity) {
+    showToast(`Limit reached: only ${AVAILABLE_STOCK} items available`, 1800);
+    return;
+  }
+
+  cartQuantity = nextQty;
   renderCartQty();
+
+  if (delta > 0 && cartQuantity === AVAILABLE_STOCK) {
+    showToast(`Limit reached: only ${AVAILABLE_STOCK} items available`, 1800);
+  }
 }
 
 function renderCartQty() {
   const qtyEl = document.getElementById('cart-qty');
   const totalEl = document.getElementById('checkout-total');
   const btnTotalEl = document.getElementById('checkout-btn-total');
+  const minusBtn = document.querySelector('.stepper-btn.minus');
+  const plusBtn = document.querySelector('.stepper-btn.plus');
   const unitPrice = 4.20;
   const total = (unitPrice * cartQuantity).toFixed(2);
 
   if (qtyEl) qtyEl.textContent = cartQuantity;
   if (totalEl) totalEl.textContent = `AED ${total}`;
   if (btnTotalEl) btnTotalEl.textContent = `AED ${total}`;
+
+  if (minusBtn) minusBtn.disabled = cartQuantity <= 1;
+  if (plusBtn) plusBtn.disabled = cartQuantity >= AVAILABLE_STOCK;
 }
 
 /* ── Animated Counters (Impact) ─────────────────────── */

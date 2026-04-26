@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy 8s Sketches - Sur+</title>
+    <style>
+        :root {
+            --bg: #f0f2f5;
+            --panel-border: #94a3b8;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+        body {
+            background-color: var(--bg);
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4rem;
+        }
+        .sheet {
+            background: white;
+            /* A4 Portrait size in pixels approx */
+            width: 794px; 
+            height: 1123px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            box-sizing: border-box;
+        }
+        .sheet-title {
+            position: absolute;
+            margin-top: -30px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+        .panel {
+            border: 2px dashed var(--panel-border);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .panel h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: var(--text-main);
+        }
+        .panel p {
+            margin: 0 0 10px 0;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        .wireframe {
+            flex: 1;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .wireframe svg {
+            max-width: 100%;
+            max-height: 100%;
+            color: #64748b;
+        }
+        @media print {
+            body { background: white; padding: 0; gap: 0; }
+            .sheet { box-shadow: none; margin: 0; page-break-after: always; width: 100%; height: 100vh; padding: 10mm; }
+            .sheet-title { margin-top: -10mm; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Member 1: Resident / Shopper -->
+    <div style="position:relative;">
+        <div class="sheet-title">Member 1: The Shopper POV (Focus on Discovery)</div>
+        <div class="sheet">
+            <div class="panel">
+                <h3>1. Map Explorer</h3>
+                <p>Large map with pins. Bottom drawer peeks up showing a selected store's surplus.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <circle cx="50" cy="60" r="4"/>
+                        <circle cx="30" cy="80" r="4"/>
+                        <path d="M10 100 Q 50 90 90 100 L 90 140 L 10 140 Z" fill="#e2e8f0"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>2. Swipe to Save</h3>
+                <p>Tinder-style interface. Large photo of food. Swipe right to claim, left to skip.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="20" y="30" width="60" height="70" rx="5"/>
+                        <circle cx="35" cy="120" r="8"/>
+                        <circle cx="65" cy="120" r="8"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>3. Countdown List</h3>
+                <p>Vertical feed focusing on urgency. Large countdown timers (e.g. "Expires 2h").</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="15" y="25" width="70" height="25" rx="3"/>
+                        <rect x="15" y="60" width="70" height="25" rx="3"/>
+                        <rect x="15" y="95" width="70" height="25" rx="3"/>
+                        <circle cx="25" cy="37" r="5"/><line x1="35" y1="37" x2="75" y2="37"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>4. Lock Screen Alerts</h3>
+                <p>Push notifications dominating the experience. "Your favorite bakery dropped 5 bags!"</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <text x="50" y="40" font-size="12" text-anchor="middle" stroke="none" fill="currentColor">12:00</text>
+                        <rect x="15" y="60" width="70" height="30" rx="5"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>5. Impact Dashboard</h3>
+                <p>Gamified profile. Charts showing CO2 saved, money saved, and badges earned.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <circle cx="50" cy="40" r="15"/>
+                        <circle cx="30" cy="80" r="10"/><circle cx="50" cy="80" r="10"/><circle cx="70" cy="80" r="10"/>
+                        <rect x="20" y="105" width="60" height="20" rx="2"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>6. AR Discovery</h3>
+                <p>Looking through the camera, floating digital tags hover over real store fronts.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <path d="M10 75 L 90 75" stroke-dasharray="2 2"/>
+                        <rect x="40" y="40" width="30" height="15" rx="2"/>
+                        <path d="M55 55 L 50 65"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>7. Recipe Matcher</h3>
+                <p>Input "I have pasta", app shows nearby surplus tomatoes and basil.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="20" y="25" width="60" height="15" rx="7"/>
+                        <rect x="20" y="55" width="60" height="60" rx="5"/>
+                        <line x1="25" y1="65" x2="75" y2="65"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>8. Mystery Box Sub</h3>
+                <p>Toggle switch to subscribe to a weekly random surplus bag based on dietary prefs.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="25" y="40" width="50" height="40" rx="5"/>
+                        <rect x="35" y="100" width="30" height="15" rx="7"/>
+                        <circle cx="42" cy="107" r="5" fill="currentColor"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member 2: Retailer -->
+    <div style="position:relative;">
+        <div class="sheet-title">Member 2: The Retailer POV (Focus on Inventory)</div>
+        <div class="sheet">
+            <div class="panel">
+                <h3>1. Quick Snap Upload</h3>
+                <p>Camera interface is the home screen. Snap a pic, AI tags it, instantly listed.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="15" y="20" width="70" height="80" rx="5"/>
+                        <circle cx="50" cy="115" r="10"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>2. 1-Click Templates</h3>
+                <p>Buttons for common items: "End of Day Pastries", "Mixed Veggie Bag".</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="20" y="30" width="60" height="20" rx="4"/>
+                        <rect x="20" y="60" width="60" height="20" rx="4"/>
+                        <rect x="20" y="90" width="60" height="20" rx="4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>3. Voice Inventory</h3>
+                <p>Microphone button dominates. Retailer speaks: "List 5 loaves of bread."</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <circle cx="50" cy="75" r="20"/>
+                        <path d="M45 70 Q50 80 55 70" />
+                        <line x1="20" y1="110" x2="80" y2="110" stroke-dasharray="2 4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>4. POS Auto-Sync</h3>
+                <p>Dashboard showing link to Cash Register. Unsold stock auto-lists at 5 PM.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="25" y="30" width="50" height="30" rx="2"/>
+                        <line x1="50" y1="60" x2="50" y2="80"/><polyline points="45,75 50,80 55,75"/>
+                        <rect x="25" y="80" width="50" height="30" rx="2"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>5. Drop Schedule</h3>
+                <p>Calendar view. Drag and drop "Surplus bags" onto specific days/times.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="15" y="30" width="70" height="70" rx="0"/>
+                        <line x1="15" y1="53" x2="85" y2="53"/>
+                        <line x1="38" y1="30" x2="38" y2="100"/>
+                        <rect x="42" y="60" width="15" height="15" fill="#cbd5e1"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>6. Pickup QR Scanner</h3>
+                <p>Scanner mode to verify a customer picking up their reserved bag.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="25" y="45" width="50" height="50" rx="0"/>
+                        <line x1="15" y1="70" x2="85" y2="70" stroke="red"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>7. Store Leaderboard</h3>
+                <p>Friendly neighborhood competition showing which store saved the most food.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="20" y="40" width="15" height="60"/>
+                        <rect x="42" y="20" width="15" height="80"/>
+                        <rect x="64" y="60" width="15" height="40"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>8. Auto-Pricing Slider</h3>
+                <p>Slider sets rule: "Drop price by 10% every hour until closed."</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <line x1="20" y1="60" x2="80" y2="60"/>
+                        <circle cx="40" cy="60" r="6" fill="currentColor"/>
+                        <rect x="20" y="80" width="60" height="20" rx="4"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member 3: Community/Admin -->
+    <div style="position:relative;">
+        <div class="sheet-title">Member 3: Volunteer POV (Focus on Logistics)</div>
+        <div class="sheet">
+            <div class="panel">
+                <h3>1. Volunteer Route Map</h3>
+                <p>Connects 3 stores to 1 food bank, showing optimal driving route.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <circle cx="30" cy="40" r="3"/>
+                        <circle cx="70" cy="50" r="3"/>
+                        <circle cx="50" cy="100" r="3"/>
+                        <polyline points="30,40 70,50 50,100" stroke-dasharray="4 2"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>2. Surplus Heatmap</h3>
+                <p>City map showing red zones (high surplus) vs blue zones (high demand).</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <circle cx="40" cy="50" r="20" stroke-width="0" fill="#fecaca"/>
+                        <circle cx="60" cy="90" r="15" stroke-width="0" fill="#bfdbfe"/>
+                        <path d="M20 20 Q 50 60 80 30" stroke="#cbd5e1"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>3. Community Request Board</h3>
+                <p>Forum style UI where residents can "request" items, driving store supply.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="15" y="25" width="70" height="30" rx="3"/>
+                        <rect x="15" y="65" width="70" height="30" rx="3"/>
+                        <circle cx="75" cy="40" r="4"/><circle cx="75" cy="80" r="4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>4. Volunteer Matcher</h3>
+                <p>Swipe-style UI to match available drivers with pending bulk surplus runs.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="25" y="40" width="50" height="50" rx="25"/>
+                        <path d="M35 110 L 65 110" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>5. Impact PDF Generator</h3>
+                <p>One-click export showing local government the waste reduced.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="30" y="40" width="40" height="50" rx="0"/>
+                        <line x1="35" y1="50" x2="65" y2="50"/><line x1="35" y1="60" x2="55" y2="60"/>
+                        <circle cx="50" cy="115" r="8"/>
+                        <line x1="50" y1="110" x2="50" y2="120"/><polyline points="46,116 50,120 54,116"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>6. Neighborhood Goal</h3>
+                <p>Giant progress bar filling up: "1,000 meals saved together!"</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="20" y="65" width="60" height="10" rx="5"/>
+                        <rect x="20" y="65" width="40" height="10" rx="5" fill="currentColor"/>
+                        <circle cx="50" cy="40" r="12"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>7. Triple Chat</h3>
+                <p>Group chat UI: Store owner, Driver, and Food Bank coordinating pickup.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <rect x="15" y="30" width="40" height="15" rx="5"/>
+                        <rect x="45" y="55" width="40" height="15" rx="5"/>
+                        <rect x="15" y="80" width="40" height="15" rx="5"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>8. Megaphone Alert</h3>
+                <p>Big red button to push an emergency alert for highly perishable bulk drops.</p>
+                <div class="wireframe">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="80" height="130" rx="10"/>
+                        <circle cx="50" cy="60" r="25" stroke="red" stroke-width="3"/>
+                        <path d="M45 55 L 60 50 L 60 70 L 45 65 Z" fill="red"/>
+                        <line x1="35" y1="60" x2="45" y2="60" stroke="red"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

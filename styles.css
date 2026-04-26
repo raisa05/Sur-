@@ -1074,12 +1074,29 @@ body {
   color: #fff;
   box-shadow: 0 1px 4px rgba(44,105,78,0.25);
 }
+.stepper-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
 .stepper-count {
   font-weight: 700;
   font-size: 0.8125rem;
   color: var(--primary-container);
   min-width: 1rem;
   text-align: center;
+}
+.checkout-limit-note {
+  min-height: 0.9rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-error);
+  line-height: 1.2;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.checkout-limit-note.visible {
+  opacity: 1;
 }
 
 /* ── Collectible Card (Impact page) ─────────────────── */

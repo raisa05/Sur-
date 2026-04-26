@@ -128,31 +128,35 @@ function togglePersona() {
 function changeQty(delta) {
   const nextQty = Math.max(1, Math.min(AVAILABLE_STOCK, cartQuantity + delta));
 
-  if (delta > 0 && nextQty === cartQuantity) {
-    showToast(`Limit reached: only ${AVAILABLE_STOCK} items available`, 1800);
-    return;
-  }
-
   cartQuantity = nextQty;
   renderCartQty();
-
-  if (delta > 0 && cartQuantity === AVAILABLE_STOCK) {
-    showToast(`Limit reached: only ${AVAILABLE_STOCK} items available`, 1800);
-  }
 }
 
 function renderCartQty() {
   const qtyEl = document.getElementById('cart-qty');
   const totalEl = document.getElementById('checkout-total');
   const btnTotalEl = document.getElementById('checkout-btn-total');
+  const originalPriceEl = document.getElementById('checkout-original-price');
+  const savedLabelEl = Array.from(document.querySelectorAll('span')).find((el) => el.textContent.trim() === 'You Saved');
+  const savedEl = document.getElementById('checkout-saved') || savedLabelEl?.nextElementSibling;
+  const limitEl = document.getElementById('checkout-qty-limit');
   const minusBtn = document.querySelector('.stepper-btn.minus');
   const plusBtn = document.querySelector('.stepper-btn.plus');
   const unitPrice = 4.20;
+  const originalUnitPrice = 15.00;
   const total = (unitPrice * cartQuantity).toFixed(2);
+  const originalTotal = (originalUnitPrice * cartQuantity).toFixed(2);
+  const savedTotal = ((originalUnitPrice - unitPrice) * cartQuantity).toFixed(2);
 
   if (qtyEl) qtyEl.textContent = cartQuantity;
   if (totalEl) totalEl.textContent = `AED ${total}`;
   if (btnTotalEl) btnTotalEl.textContent = `AED ${total}`;
+  if (originalPriceEl) originalPriceEl.textContent = `AED ${originalTotal}`;
+  if (savedEl) savedEl.textContent = `- AED ${savedTotal}`;
+  if (limitEl) {
+    limitEl.textContent = cartQuantity >= AVAILABLE_STOCK ? `Maximum ${AVAILABLE_STOCK} items available.` : '';
+    limitEl.classList.toggle('visible', cartQuantity >= AVAILABLE_STOCK);
+  }
 
   if (minusBtn) minusBtn.disabled = cartQuantity <= 1;
   if (plusBtn) plusBtn.disabled = cartQuantity >= AVAILABLE_STOCK;
